@@ -5,6 +5,7 @@ stages:
       - config.py
       - prompts.yaml
       - run_experiment.py
+      - inputs/questions.txt
     params:
       - prompt_version
       - temperature
