@@ -1,0 +1,9 @@
+stages:
+  run:
+    cmd: python run_experiment.py
+    deps:
+    - config.py
+    - prompts/prompt.yaml
+    - run_experiment.py
+    outs:
+    - output
