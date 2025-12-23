@@ -1,4 +1,4 @@
 [core]
     remote = storage
 ['remote "storage"']
-    url = /data/zl.zhang/dvc-storage
+    url = ssh://zl.zhang@hello-G8600-V7:/data/zl.zhang/dvc-storage
