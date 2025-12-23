@@ -16,12 +16,6 @@ from pathlib import Path
 from typing import List, Dict
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import os
-import yaml
-
-with open("params.yaml") as f:
-    params = yaml.safe_load(f)
-
-prompt_version = params["prompt_version"]
 
 from config import (
     API_KEY, API_BASE_URL,
@@ -308,7 +302,7 @@ def main():
     parser.add_argument('--limit', type=int, default=10, help='问题数量限制')
     parser.add_argument('--candidates', type=int, default=2, help='每条问题生成候选数')
     parser.add_argument('--score-rounds', type=int, default=3, help='每个候选评分次数')
-    parser.add_argument('--version', type=str, default='v1', help='版本号')
+    parser.add_argument('--version', type=str, default='v1', help='实验版本号（用于输出目录命名）')
     parser.add_argument('--top-k', type=int, default=5, help='选择Top-K')
     parser.add_argument('--input', type=str, default='inputs/questions.txt', help='输入文件')
     parser.add_argument('--log', type=str, default=None, help='日志文件路径（默认自动生成）')
