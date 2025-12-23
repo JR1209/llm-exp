@@ -1,13 +1,2 @@
-# Python
 __pycache__/
-*.pyc
-
-# Virtual env
 venv/
-
-# DVC-managed data
-Outputs/
-inputs/
-
-# OS / editor
-.DS_Store
