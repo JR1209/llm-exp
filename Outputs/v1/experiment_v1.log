@@ -1893,3 +1893,1413 @@ Rank   QID   CID   Emp    Sup    Gui    Saf    Total    Question
   - top_results_v1.jsonl
   - experiment_v1.log
 ================================================================================
+================================================================================
+🧪 实验配置 [v1] - v2.0 模块化版本
+================================================================================
+输入: inputs/questions.txt | 问题数: 10
+候选数: 2 | 评分轮次: 3 | Top-K: 5
+输出目录: Outputs/v1
+================================================================================
+
+✅ 已加载 3 个问题
+
+================================================================================
+Step 1: Qwen Batch Generation (Parallel)
+================================================================================
+问题数: 3 | 每题候选: 2 | 并行数: 100
+
+QID   CID   Status     Length    
+--------------------------------------------------------------------------------
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 400 Bad Request"
+API调用异常 [qwen-max-latest] (尝试 1/3): Error code: 400 - {'trace_id': 'trace_31zAp9RlLlt6TiyGq6ZWe', 'code': 1050, 'at': '2025-12-26T05:36:28.602622+00:00', 'message': 'Invalid argument', 'data': '{"error":{"message":"<400> InternalError.Algo.InvalidParameter: \'messages\' must contain the word \'json\' in some form, to use \'response_format\' of type \'json_object\'.","type":"invalid_request_error","param":null,"code":"invalid_parameter_error"},"id":"chatcmpl-aff3e718-f5cf-9d65-9bbc-d60f11b5b8f2","request_id":"aff3e718-f5cf-9d65-9bbc-d60f11b5b8f2"}'}
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 400 Bad Request"
+API调用异常 [qwen-max-latest] (尝试 1/3): Error code: 400 - {'trace_id': 'trace_31zAp9Rxj5v6gnFqiOKgh', 'code': 1050, 'at': '2025-12-26T05:36:28.680043+00:00', 'message': 'Invalid argument', 'data': '{"error":{"message":"<400> InternalError.Algo.InvalidParameter: \'messages\' must contain the word \'json\' in some form, to use \'response_format\' of type \'json_object\'.","type":"invalid_request_error","param":null,"code":"invalid_parameter_error"},"id":"chatcmpl-9a3ce901-8644-919e-8e1c-1bbbb0004249","request_id":"9a3ce901-8644-919e-8e1c-1bbbb0004249"}'}
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 400 Bad Request"
+API调用异常 [qwen-max-latest] (尝试 1/3): Error code: 400 - {'trace_id': 'trace_31zAp9Rrbpnxj3qmA0Som', 'code': 1050, 'at': '2025-12-26T05:36:28.754880+00:00', 'message': 'Invalid argument', 'data': '{"error":{"message":"<400> InternalError.Algo.InvalidParameter: \'messages\' must contain the word \'json\' in some form, to use \'response_format\' of type \'json_object\'.","type":"invalid_request_error","param":null,"code":"invalid_parameter_error"},"id":"chatcmpl-76340425-7f13-920b-8371-ede1637f9bb8","request_id":"76340425-7f13-920b-8371-ede1637f9bb8"}'}
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 400 Bad Request"
+API调用异常 [qwen-max-latest] (尝试 1/3): Error code: 400 - {'trace_id': 'trace_31zAp9Qt8mg95FxehF6V4', 'code': 1050, 'at': '2025-12-26T05:36:28.807349+00:00', 'message': 'Invalid argument', 'data': '{"error":{"message":"<400> InternalError.Algo.InvalidParameter: \'messages\' must contain the word \'json\' in some form, to use \'response_format\' of type \'json_object\'.","type":"invalid_request_error","param":null,"code":"invalid_parameter_error"},"id":"chatcmpl-30f99482-72ed-98f9-b33d-83839fd837ff","request_id":"30f99482-72ed-98f9-b33d-83839fd837ff"}'}
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 400 Bad Request"
+API调用异常 [qwen-max-latest] (尝试 1/3): Error code: 400 - {'trace_id': 'trace_31zAp9RfUjTkxro2GilcI', 'code': 1050, 'at': '2025-12-26T05:36:28.860545+00:00', 'message': 'Invalid argument', 'data': '{"error":{"message":"<400> InternalError.Algo.InvalidParameter: \'messages\' must contain the word \'json\' in some form, to use \'response_format\' of type \'json_object\'.","type":"invalid_request_error","param":null,"code":"invalid_parameter_error"},"id":"chatcmpl-17e4457e-1f77-94c1-9966-ef1ea004df43","request_id":"17e4457e-1f77-94c1-9966-ef1ea004df43"}'}
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 400 Bad Request"
+API调用异常 [qwen-max-latest] (尝试 1/3): Error code: 400 - {'trace_id': 'trace_31zAp9RZMBfJYrBB5H6io', 'code': 1050, 'at': '2025-12-26T05:36:28.878780+00:00', 'message': 'Invalid argument', 'data': '{"error":{"message":"<400> InternalError.Algo.InvalidParameter: \'messages\' must contain the word \'json\' in some form, to use \'response_format\' of type \'json_object\'.","type":"invalid_request_error","param":null,"code":"invalid_parameter_error"},"id":"chatcmpl-8a507da1-4796-9bab-baf7-9716e9b87d19","request_id":"8a507da1-4796-9bab-baf7-9716e9b87d19"}'}
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 400 Bad Request"
+API调用异常 [qwen-max-latest] (尝试 2/3): Error code: 400 - {'trace_id': 'trace_31zApDjgkrtGGPdjubxYh', 'code': 1050, 'at': '2025-12-26T05:36:31.364712+00:00', 'message': 'Invalid argument', 'data': '{"error":{"message":"<400> InternalError.Algo.InvalidParameter: \'messages\' must contain the word \'json\' in some form, to use \'response_format\' of type \'json_object\'.","type":"invalid_request_error","param":null,"code":"invalid_parameter_error"},"id":"chatcmpl-15ea5778-092d-9f24-9eae-c00f62140810","request_id":"15ea5778-092d-9f24-9eae-c00f62140810"}'}
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 400 Bad Request"
+API调用异常 [qwen-max-latest] (尝试 2/3): Error code: 400 - {'trace_id': 'trace_31zApDoN0jd5wum8NeigL', 'code': 1050, 'at': '2025-12-26T05:36:31.409001+00:00', 'message': 'Invalid argument', 'data': '{"error":{"message":"<400> InternalError.Algo.InvalidParameter: \'messages\' must contain the word \'json\' in some form, to use \'response_format\' of type \'json_object\'.","type":"invalid_request_error","param":null,"code":"invalid_parameter_error"},"id":"chatcmpl-5703bcc1-a47c-9c49-9c89-62c1b836f58c","request_id":"5703bcc1-a47c-9c49-9c89-62c1b836f58c"}'}
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 400 Bad Request"
+API调用异常 [qwen-max-latest] (尝试 2/3): Error code: 400 - {'trace_id': 'trace_31zApDVGG56PTOETkiPIe', 'code': 1050, 'at': '2025-12-26T05:36:31.446621+00:00', 'message': 'Invalid argument', 'data': '{"error":{"message":"<400> InternalError.Algo.InvalidParameter: \'messages\' must contain the word \'json\' in some form, to use \'response_format\' of type \'json_object\'.","type":"invalid_request_error","param":null,"code":"invalid_parameter_error"},"id":"chatcmpl-f0dc7ee0-4e91-9139-892f-b0a8a1078786","request_id":"f0dc7ee0-4e91-9139-892f-b0a8a1078786"}'}
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 400 Bad Request"
+API调用异常 [qwen-max-latest] (尝试 2/3): Error code: 400 - {'trace_id': 'trace_31zApDc5WDLPAhb3tqQ2j', 'code': 1050, 'at': '2025-12-26T05:36:31.470573+00:00', 'message': 'Invalid argument', 'data': '{"error":{"message":"<400> InternalError.Algo.InvalidParameter: \'messages\' must contain the word \'json\' in some form, to use \'response_format\' of type \'json_object\'.","type":"invalid_request_error","param":null,"code":"invalid_parameter_error"},"id":"chatcmpl-66534dab-d2fa-94b6-a67d-15a72954fcac","request_id":"66534dab-d2fa-94b6-a67d-15a72954fcac"}'}
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 400 Bad Request"
+API调用异常 [qwen-max-latest] (尝试 2/3): Error code: 400 - {'trace_id': 'trace_31zApE0SOCnyYa2ReXaL5', 'code': 1050, 'at': '2025-12-26T05:36:31.562577+00:00', 'message': 'Invalid argument', 'data': '{"error":{"message":"<400> InternalError.Algo.InvalidParameter: \'messages\' must contain the word \'json\' in some form, to use \'response_format\' of type \'json_object\'.","type":"invalid_request_error","param":null,"code":"invalid_parameter_error"},"id":"chatcmpl-fcbe56f6-b183-93df-916a-ef21b94d3eb6","request_id":"fcbe56f6-b183-93df-916a-ef21b94d3eb6"}'}
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 400 Bad Request"
+API调用异常 [qwen-max-latest] (尝试 2/3): Error code: 400 - {'trace_id': 'trace_31zApE9ikvSWTSl7SHIn8', 'code': 1050, 'at': '2025-12-26T05:36:31.825360+00:00', 'message': 'Invalid argument', 'data': '{"error":{"message":"<400> InternalError.Algo.InvalidParameter: \'messages\' must contain the word \'json\' in some form, to use \'response_format\' of type \'json_object\'.","type":"invalid_request_error","param":null,"code":"invalid_parameter_error"},"id":"chatcmpl-3de3c2b5-d586-9bb4-b077-25cfe560a48a","request_id":"3de3c2b5-d586-9bb4-b077-25cfe560a48a"}'}
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 400 Bad Request"
+API调用异常 [qwen-max-latest] (尝试 3/3): Error code: 400 - {'trace_id': 'trace_31zApHtovZzljJNMnCgDd', 'code': 1050, 'at': '2025-12-26T05:36:34.212758+00:00', 'message': 'Invalid argument', 'data': '{"error":{"message":"<400> InternalError.Algo.InvalidParameter: \'messages\' must contain the word \'json\' in some form, to use \'response_format\' of type \'json_object\'.","type":"invalid_request_error","param":null,"code":"invalid_parameter_error"},"id":"chatcmpl-33188803-c675-9a1d-82dd-348c2d5a346c","request_id":"33188803-c675-9a1d-82dd-348c2d5a346c"}'}
+API调用最终失败 [qwen-max-latest]
+1     1     ✗ Failed   0         
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 400 Bad Request"
+API调用异常 [qwen-max-latest] (尝试 3/3): Error code: 400 - {'trace_id': 'trace_31zApHzxNIWxKWZqX7scX', 'code': 1050, 'at': '2025-12-26T05:36:34.264620+00:00', 'message': 'Invalid argument', 'data': '{"error":{"message":"<400> InternalError.Algo.InvalidParameter: \'messages\' must contain the word \'json\' in some form, to use \'response_format\' of type \'json_object\'.","type":"invalid_request_error","param":null,"code":"invalid_parameter_error"},"id":"chatcmpl-5d4e0d9f-47e2-9a31-af99-09e87004cb6f","request_id":"5d4e0d9f-47e2-9a31-af99-09e87004cb6f"}'}
+API调用最终失败 [qwen-max-latest]
+3     1     ✗ Failed   0         
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 400 Bad Request"
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 400 Bad Request"
+API调用异常 [qwen-max-latest] (尝试 3/3): Error code: 400 - {'trace_id': 'trace_31zApI0jpb97SbgnAph8O', 'code': 1050, 'at': '2025-12-26T05:36:34.334150+00:00', 'message': 'Invalid argument', 'data': '{"error":{"message":"<400> InternalError.Algo.InvalidParameter: \'messages\' must contain the word \'json\' in some form, to use \'response_format\' of type \'json_object\'.","type":"invalid_request_error","param":null,"code":"invalid_parameter_error"},"id":"chatcmpl-8d760483-f95f-9a19-b556-a5159f86ed33","request_id":"8d760483-f95f-9a19-b556-a5159f86ed33"}'}
+API调用最终失败 [qwen-max-latest]
+1     2     ✗ Failed   0         
+API调用异常 [qwen-max-latest] (尝试 3/3): Error code: 400 - {'trace_id': 'trace_31zApHpQxSpkmcBSVovut', 'code': 1050, 'at': '2025-12-26T05:36:34.350026+00:00', 'message': 'Invalid argument', 'data': '{"error":{"message":"<400> InternalError.Algo.InvalidParameter: \'messages\' must contain the word \'json\' in some form, to use \'response_format\' of type \'json_object\'.","type":"invalid_request_error","param":null,"code":"invalid_parameter_error"},"id":"chatcmpl-2c199bcd-88f8-9163-bb07-8c19b4f73659","request_id":"2c199bcd-88f8-9163-bb07-8c19b4f73659"}'}
+API调用最终失败 [qwen-max-latest]
+2     1     ✗ Failed   0         
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 400 Bad Request"
+API调用异常 [qwen-max-latest] (尝试 3/3): Error code: 400 - {'trace_id': 'trace_31zApIaJu9QPK29JyCNDa', 'code': 1050, 'at': '2025-12-26T05:36:34.354414+00:00', 'message': 'Invalid argument', 'data': '{"error":{"message":"<400> InternalError.Algo.InvalidParameter: \'messages\' must contain the word \'json\' in some form, to use \'response_format\' of type \'json_object\'.","type":"invalid_request_error","param":null,"code":"invalid_parameter_error"},"id":"chatcmpl-eb720eee-e417-9f78-9927-4c4b48352dbb","request_id":"eb720eee-e417-9f78-9927-4c4b48352dbb"}'}
+API调用最终失败 [qwen-max-latest]
+3     2     ✗ Failed   0         
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 400 Bad Request"
+API调用异常 [qwen-max-latest] (尝试 3/3): Error code: 400 - {'trace_id': 'trace_31zApI9bit2mocA2kBLBr', 'code': 1050, 'at': '2025-12-26T05:36:34.377554+00:00', 'message': 'Invalid argument', 'data': '{"error":{"message":"<400> InternalError.Algo.InvalidParameter: \'messages\' must contain the word \'json\' in some form, to use \'response_format\' of type \'json_object\'.","type":"invalid_request_error","param":null,"code":"invalid_parameter_error"},"id":"chatcmpl-92335055-e741-9db4-a578-04679e7380b6","request_id":"92335055-e741-9db4-a578-04679e7380b6"}'}
+API调用最终失败 [qwen-max-latest]
+2     2     ✗ Failed   0         
+--------------------------------------------------------------------------------
+✅ Step 1 完成: 0/6 成功
+
+💾 已保存: Outputs/v1/qwen_candidates_v1.jsonl
+
+================================================================================
+Step 2: GPT Multi-round Scoring (Parallel)
+================================================================================
+候选数: 0 | 评分轮次: 3 | 并行数: 100
+
+QID   CID   Emp    Sup    Gui    Saf    Total   
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+✅ Step 2 完成: 0 个候选评分完成
+
+💾 已保存: Outputs/v1/gpt_scores_v1.jsonl
+
+================================================================================
+Step 3: Top-K Selection
+================================================================================
+
+Rank   QID   CID   Emp    Sup    Gui    Saf    Total    Question                      
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+✅ Step 3 完成: Top-0 已保存
+
+💾 已保存: Outputs/v1/top_results_v1.jsonl
+
+================================================================================
+🎉 实验完成！
+================================================================================
+输出目录: Outputs/v1
+  - qwen_candidates_v1.jsonl
+  - gpt_scores_v1.jsonl
+  - top_results_v1.jsonl
+  - experiment_v1.log
+================================================================================
+================================================================================
+🧪 实验配置 [v1] - v2.0 模块化版本
+================================================================================
+输入: inputs/questions.txt | 问题数: 10
+候选数: 2 | 评分轮次: 3 | Top-K: 5
+输出目录: Outputs/v1
+================================================================================
+
+✅ 已加载 3 个问题
+
+================================================================================
+Step 1: Qwen Batch Generation (Parallel)
+================================================================================
+问题数: 3 | 每题候选: 2 | 并行数: 100
+
+QID   CID   Status     Length    
+--------------------------------------------------------------------------------
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+API调用异常 [qwen-max-latest] (尝试 1/3): 10 validation errors for GenerationOutput
+dialogue.0.content
+  Field required [type=missing, input_value={'role': 'User', 'message...要去就特别烦。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.1.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...在这里陪着你。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.2.content
+  Field required [type=missing, input_value={'role': 'User', 'message...是被老师盯着。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.3.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...很难轻松下来？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.4.content
+  Field required [type=missing, input_value={'role': 'User', 'message...觉得挺难受的。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.5.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...稍微好一点呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.6.content
+  Field required [type=missing, input_value={'role': 'User', 'message...看他们的脸色。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.7.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...你觉得怎么样？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.8.content
+  Field required [type=missing, input_value={'role': 'User', 'message...真的能改变吗？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.9.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...会有新的发现？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+API调用异常 [qwen-max-latest] (尝试 1/3): 10 validation errors for GenerationOutput
+dialogue.0.content
+  Field required [type=missing, input_value={'role': 'User', 'message...不知道为什么。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.1.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...松，是这样吗？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.2.content
+  Field required [type=missing, input_value={'role': 'User', 'message...事情没做完……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.3.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...让你放不下吗？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.4.content
+  Field required [type=missing, input_value={'role': 'User', 'message...完，越想越烦。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.5.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...躁减轻一些呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.6.content
+  Field required [type=missing, input_value={'role': 'User', 'message...么都觉得费劲。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.7.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...重要性，好吗？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.8.content
+  Field required [type=missing, input_value={'role': 'User', 'message...放下这些念头。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.9.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...能够安心入睡！'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+API调用异常 [qwen-max-latest] (尝试 1/3): 10 validation errors for GenerationOutput
+dialogue.0.content
+  Field required [type=missing, input_value={'role': 'User', 'message': '我好烦。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.1.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...你的每一个字。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.2.content
+  Field required [type=missing, input_value={'role': 'User', 'message...乱七八糟的……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.3.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...得难以应对呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.4.content
+  Field required [type=missing, input_value={'role': 'User', 'message...的快受不了了！'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.5.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...下工作节奏呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.6.content
+  Field required [type=missing, input_value={'role': 'User', 'message...不会听我的……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.7.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...你觉得怎么样？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.8.content
+  Field required [type=missing, input_value={'role': 'User', 'message...不够解决问题。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.9.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...，随时支持你。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+API调用异常 [qwen-max-latest] (尝试 1/3): 10 validation errors for GenerationOutput
+dialogue.0.content
+  Field required [type=missing, input_value={'role': 'User', 'message...点动力都没有。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.1.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...你这么抗拒吗？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.2.content
+  Field required [type=missing, input_value={'role': 'User', 'message...跟同学闹别扭。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.3.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...有办法解决吗？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.4.content
+  Field required [type=missing, input_value={'role': 'User', 'message...己也会内疚……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.5.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...缓解你的压力？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.6.content
+  Field required [type=missing, input_value={'role': 'User', 'message...那些复杂的事。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.7.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...下一步，好吗？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.8.content
+  Field required [type=missing, input_value={'role': 'User', 'message...心明天怎么办。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.9.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...适应学校生活。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+API调用异常 [qwen-max-latest] (尝试 1/3): 10 validation errors for GenerationOutput
+dialogue.0.content
+  Field required [type=missing, input_value={'role': 'User', 'message...…真的好累啊。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.1.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...你操心的事情？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.2.content
+  Field required [type=missing, input_value={'role': 'User', 'message...晚上也睡不好。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.3.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...上难以入睡呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.4.content
+  Field required [type=missing, input_value={'role': 'User', 'message...来，越想越烦。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.5.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...慢慢平静下来？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.6.content
+  Field required [type=missing, input_value={'role': 'User', 'message...住去想那些事。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.7.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...你来说可行吗？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.8.content
+  Field required [type=missing, input_value={'role': 'User', 'message...直憋在心里强。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.9.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...的减压方法哦。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+API调用异常 [qwen-max-latest] (尝试 1/3): 10 validation errors for GenerationOutput
+dialogue.0.content
+  Field required [type=missing, input_value={'role': 'User', 'message': '我好烦。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.1.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...听听你的感受。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.2.content
+  Field required [type=missing, input_value={'role': 'User', 'message...人都快崩溃了。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.3.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...压力的地方呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.4.content
+  Field required [type=missing, input_value={'role': 'User', 'message...，真是烦死了！'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.5.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...下这种情况呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.6.content
+  Field required [type=missing, input_value={'role': 'User', 'message...只能忍着吧……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.7.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...己的放松方式？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.8.content
+  Field required [type=missing, input_value={'role': 'User', 'message...不能坚持下去。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.9.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...己的解决办法！'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+API调用异常 [qwen-max-latest] (尝试 2/3): 10 validation errors for GenerationOutput
+dialogue.0.content
+  Field required [type=missing, input_value={'role': 'User', 'message...要去就特别烦。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.1.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...这么不想去吗？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.2.content
+  Field required [type=missing, input_value={'role': 'User', 'message...背后议论我……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.3.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...变得严重的呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.4.content
+  Field required [type=missing, input_value={'role': 'User', 'message...开始指指点点。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.5.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...怎么应对的呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.6.content
+  Field required [type=missing, input_value={'role': 'User', 'message...都提不起精神。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.7.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...家人或者朋友？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.8.content
+  Field required [type=missing, input_value={'role': 'User', 'message...会懂我的感受。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.9.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...其他亲近的人？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+API调用异常 [qwen-max-latest] (尝试 2/3): 10 validation errors for GenerationOutput
+dialogue.0.content
+  Field required [type=missing, input_value={'role': 'User', 'message...觉得睡不踏实。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.1.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...发生了什么吗？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.2.content
+  Field required [type=missing, input_value={'role': 'User', 'message...事情堆在一起。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.3.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...让你最困扰呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.4.content
+  Field required [type=missing, input_value={'role': 'User', 'message...道该怎么处理。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.5.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...喘息的空间呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.6.content
+  Field required [type=missing, input_value={'role': 'User', 'message...了，只想躺着。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.7.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...的一种关爱哦。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.8.content
+  Field required [type=missing, input_value={'role': 'User', 'message...你听我说这些。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.9.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...己的片刻宁静。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+API调用异常 [qwen-max-latest] (尝试 2/3): 10 validation errors for GenerationOutput
+dialogue.0.content
+  Field required [type=missing, input_value={'role': 'User', 'message...出门就特别烦。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.1.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...在这里陪着你。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.2.content
+  Field required [type=missing, input_value={'role': 'User', 'message...试也考砸了……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.3.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...失去了动力吗？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.4.content
+  Field required [type=missing, input_value={'role': 'User', 'message...不适合学习……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.5.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...望或者兴趣呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.6.content
+  Field required [type=missing, input_value={'role': 'User', 'message...拖累了他们……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.7.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...再深入谈谈吗？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.8.content
+  Field required [type=missing, input_value={'role': 'User', 'message...觉得我很笨……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.9.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...种成长的机会？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+API调用异常 [qwen-max-latest] (尝试 2/3): 10 validation errors for GenerationOutput
+dialogue.0.content
+  Field required [type=missing, input_value={'role': 'User', 'message': '我好烦。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.1.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...你这么烦躁吗？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.2.content
+  Field required [type=missing, input_value={'role': 'User', 'message...知道从哪下手。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.3.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...处理的事情呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.4.content
+  Field required [type=missing, input_value={'role': 'User', 'message...真的快崩溃了。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.5.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...也可以聊聊哦。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.6.content
+  Field required [type=missing, input_value={'role': 'User', 'message...好，怕搞砸了。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.7.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...想法细化一下？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.8.content
+  Field required [type=missing, input_value={'role': 'User', 'message...没那么憋屈了。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.9.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...会找到出路的。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+API调用异常 [qwen-max-latest] (尝试 2/3): 10 validation errors for GenerationOutput
+dialogue.0.content
+  Field required [type=missing, input_value={'role': 'User', 'message...在只想睡觉……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.1.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...让你这么累吗？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.2.content
+  Field required [type=missing, input_value={'role': 'User', 'message...能缓解一点……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.3.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...扰着你，对吗？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.4.content
+  Field required [type=missing, input_value={'role': 'User', 'message...里什么都不管。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.5.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...减轻一些负担。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.6.content
+  Field required [type=missing, input_value={'role': 'User', 'message...觉逃避一下……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.7.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...易处理一点呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.8.content
+  Field required [type=missing, input_value={'role': 'User', 'message...先睡一觉再说。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.9.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...祝你睡个好觉！'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+API调用异常 [qwen-max-latest] (尝试 2/3): 10 validation errors for GenerationOutput
+dialogue.0.content
+  Field required [type=missing, input_value={'role': 'User', 'message': '我好烦。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.1.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...你觉得烦躁吗？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.2.content
+  Field required [type=missing, input_value={'role': 'User', 'message...知道该怎么办。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.3.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...你觉得怎么样？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.4.content
+  Field required [type=missing, input_value={'role': 'User', 'message...催我，特别乱。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.5.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...感觉轻松一点？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.6.content
+  Field required [type=missing, input_value={'role': 'User', 'message...怕自己做不好。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.7.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...达成的目标呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.8.content
+  Field required [type=missing, input_value={'role': 'User', 'message...了，越想越烦。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.9.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...在这里支持你。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+API调用异常 [qwen-max-latest] (尝试 3/3): 10 validation errors for GenerationOutput
+dialogue.0.content
+  Field required [type=missing, input_value={'role': 'User', 'message...学校就烦死了。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.1.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...以和我说说看。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.2.content
+  Field required [type=missing, input_value={'role': 'User', 'message...还总是批评人。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.3.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...是哪一部分呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.4.content
+  Field required [type=missing, input_value={'role': 'User', 'message...，真的很沮丧。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.5.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...自己的困难呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.6.content
+  Field required [type=missing, input_value={'role': 'User', 'message...理解我的处境。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.7.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...缓解这种压力？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.8.content
+  Field required [type=missing, input_value={'role': 'User', 'message...有点害怕改变。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.9.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...继续聊进展哦。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+API调用最终失败 [qwen-max-latest]
+1     1     ✗ Failed   0         
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+API调用异常 [qwen-max-latest] (尝试 3/3): 10 validation errors for GenerationOutput
+dialogue.0.content
+  Field required [type=missing, input_value={'role': 'User', 'message...，感觉好累啊。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.1.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...发生了什么吗？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.2.content
+  Field required [type=missing, input_value={'role': 'User', 'message...来，越想越烦。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.3.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...别难以开始呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.4.content
+  Field required [type=missing, input_value={'role': 'User', 'message...全提不起兴趣。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.5.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...稍微轻松一点？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.6.content
+  Field required [type=missing, input_value={'role': 'User', 'message...，然后更难受。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.7.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...结果，怎么样？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.8.content
+  Field required [type=missing, input_value={'role': 'User', 'message...还是有点担心。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.9.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...休息的空间哦。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+API调用最终失败 [qwen-max-latest]
+1     2     ✗ Failed   0         
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+API调用异常 [qwen-max-latest] (尝试 3/3): 10 validation errors for GenerationOutput
+dialogue.0.content
+  Field required [type=missing, input_value={'role': 'User', 'message...有点不对劲……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.1.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...‘不对劲’吗？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.2.content
+  Field required [type=missing, input_value={'role': 'User', 'message...八糟的事情……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.3.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...其他方面的呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.4.content
+  Field required [type=missing, input_value={'role': 'User', 'message...快撑不住了……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.5.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...是短暂的放松？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.6.content
+  Field required [type=missing, input_value={'role': 'User', 'message...解决不了了……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.7.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...时间照顾自己？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.8.content
+  Field required [type=missing, input_value={'role': 'User', 'message...会不会有用……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.9.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...都值得肯定哦。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+API调用最终失败 [qwen-max-latest]
+3     1     ✗ Failed   0         
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+API调用异常 [qwen-max-latest] (尝试 3/3): 10 validation errors for GenerationOutput
+dialogue.0.content
+  Field required [type=missing, input_value={'role': 'User', 'message': '我想睡觉……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.1.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...感觉休息不够？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.2.content
+  Field required [type=missing, input_value={'role': 'User', 'message...踏实，总是醒。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.3.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...者容易醒来呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.4.content
+  Field required [type=missing, input_value={'role': 'User', 'message...子里停不下来。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.5.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...聊你的感受吗？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.6.content
+  Field required [type=missing, input_value={'role': 'User', 'message...怎么办才好……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.7.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...种状态，好吗？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.8.content
+  Field required [type=missing, input_value={'role': 'User', 'message...听我说这些……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.9.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...意尝试一下吗？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+API调用最终失败 [qwen-max-latest]
+3     2     ✗ Failed   0         
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+API调用异常 [qwen-max-latest] (尝试 3/3): 10 validation errors for GenerationOutput
+dialogue.0.content
+  Field required [type=missing, input_value={'role': 'User', 'message': '我好烦。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.1.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...让你这么烦吗？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.2.content
+  Field required [type=missing, input_value={'role': 'User', 'message...自己快崩溃了。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.3.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...待，是这样吗？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.4.content
+  Field required [type=missing, input_value={'role': 'User', 'message...问题就更烦了。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.5.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...有低谷的时候。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.6.content
+  Field required [type=missing, input_value={'role': 'User', 'message...己撑不住了……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.7.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...你觉得怎么样？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.8.content
+  Field required [type=missing, input_value={'role': 'User', 'message...搞定反而更乱。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.9.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...在这里支持你。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+API调用最终失败 [qwen-max-latest]
+2     1     ✗ Failed   0         
+================================================================================
+🧪 实验配置 [v1] - v2.0 模块化版本
+================================================================================
+输入: inputs/questions.txt | 问题数: 10
+候选数: 2 | 评分轮次: 3 | Top-K: 5
+输出目录: Outputs/v1
+================================================================================
+
+✅ 已加载 3 个问题
+
+================================================================================
+Step 1: Qwen Batch Generation (Parallel)
+================================================================================
+问题数: 3 | 每题候选: 2 | 并行数: 100
+
+QID   CID   Status     Length    
+--------------------------------------------------------------------------------
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+API调用异常 [qwen-max-latest] (尝试 1/3): 10 validation errors for GenerationOutput
+dialogue.0.content
+  Field required [type=missing, input_value={'role': 'User', 'message...，感觉好累啊。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.1.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...倾听你的想法。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.2.content
+  Field required [type=missing, input_value={'role': 'User', 'message...总有人烦我……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.3.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...你特别难受呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.4.content
+  Field required [type=missing, input_value={'role': 'User', 'message...就更不想去了。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.5.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...得更好一点呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.6.content
+  Field required [type=missing, input_value={'role': 'User', 'message...肯定会骂我的。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.7.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...里开始尝试呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.8.content
+  Field required [type=missing, input_value={'role': 'User', 'message...好像没太在意。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.9.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...有信心一些哦。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+API调用异常 [qwen-max-latest] (尝试 1/3): 10 validation errors for GenerationOutput
+dialogue.0.content
+  Field required [type=missing, input_value={'role': 'User', 'message': '我想睡觉……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.1.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...特别想休息吗？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.2.content
+  Field required [type=missing, input_value={'role': 'User', 'message...做，只想躺着。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.3.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...这样的感觉吗？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.4.content
+  Field required [type=missing, input_value={'role': 'User', 'message...力气都没有……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.5.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...放松的时间呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.6.content
+  Field required [type=missing, input_value={'role': 'User', 'message...快撑不住了……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.7.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...自己的节奏呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.8.content
+  Field required [type=missing, input_value={'role': 'User', 'message...的能做到吗……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.9.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...行一些，好吗？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+API调用异常 [qwen-max-latest] (尝试 1/3): 10 validation errors for GenerationOutput
+dialogue.0.content
+  Field required [type=missing, input_value={'role': 'User', 'message...，感觉好累啊。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.1.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...这样的感觉吗？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.2.content
+  Field required [type=missing, input_value={'role': 'User', 'message...么努力也没用。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.3.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...你觉得吃力呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.4.content
+  Field required [type=missing, input_value={'role': 'User', 'message...看，真的很烦！'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.5.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...你觉得怎么样？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.6.content
+  Field required [type=missing, input_value={'role': 'User', 'message...对那些题目……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.7.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...易一点，好吗？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.8.content
+  Field required [type=missing, input_value={'role': 'User', 'message...心自己学不会。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.9.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...在这里支持你。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+API调用异常 [qwen-max-latest] (尝试 1/3): 10 validation errors for GenerationOutput
+dialogue.0.content
+  Field required [type=missing, input_value={'role': 'User', 'message': '我好烦。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.1.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...着你一起面对。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.2.content
+  Field required [type=missing, input_value={'role': 'User', 'message...还老是催我……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.3.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...更难以承受呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.4.content
+  Field required [type=missing, input_value={'role': 'User', 'message...每天都特别累。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.5.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...响了你的判断？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.6.content
+  Field required [type=missing, input_value={'role': 'User', 'message...的这么看我……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.7.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...情况的朋友呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.8.content
+  Field required [type=missing, input_value={'role': 'User', 'message...己就做不到啊。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.9.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...你觉得怎么样？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+API调用异常 [qwen-max-latest] (尝试 1/3): 10 validation errors for GenerationOutput
+dialogue.0.content
+  Field required [type=missing, input_value={'role': 'User', 'message...人都快崩溃了。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.1.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...觉得这么累吗？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.2.content
+  Field required [type=missing, input_value={'role': 'User', 'message...根本停不下来。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.3.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...持续多久了呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.4.content
+  Field required [type=missing, input_value={'role': 'User', 'message...了一种奢望……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.5.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...慢一些节奏呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.6.content
+  Field required [type=missing, input_value={'role': 'User', 'message...费了时间一样。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.7.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...你觉得怎么样？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.8.content
+  Field required [type=missing, input_value={'role': 'User', 'message...开始比较好……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.9.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...过程是值得的。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+API调用异常 [qwen-max-latest] (尝试 1/3): 10 validation errors for GenerationOutput
+dialogue.0.content
+  Field required [type=missing, input_value={'role': 'User', 'message': '我好烦。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.1.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...着你一起面对。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.2.content
+  Field required [type=missing, input_value={'role': 'User', 'message...理不清楚头绪。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.3.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...你最在意的呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.4.content
+  Field required [type=missing, input_value={'role': 'User', 'message...觉快撑不住了。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.5.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...点喜欢的事情？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.6.content
+  Field required [type=missing, input_value={'role': 'User', 'message...像个机器一样。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.7.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...最容易接受呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.8.content
+  Field required [type=missing, input_value={'role': 'User', 'message...比一直闷着强。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.9.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...来找我，好吗？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+API调用异常 [qwen-max-latest] (尝试 2/3): 10 validation errors for GenerationOutput
+dialogue.0.content
+  Field required [type=missing, input_value={'role': 'User', 'message...事情就是睡觉。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.1.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...让你这么累吗？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.2.content
+  Field required [type=missing, input_value={'role': 'User', 'message...呼吸都是负担。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.3.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...微轻松一点呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.4.content
+  Field required [type=missing, input_value={'role': 'User', 'message...根本放松不了。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.5.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...你觉得怎么样？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.6.content
+  Field required [type=missing, input_value={'role': 'User', 'message...些烦人的事情。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.7.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...个缓冲的空间。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.8.content
+  Field required [type=missing, input_value={'role': 'User', 'message...没那么压抑了。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.9.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...在这里支持你。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+API调用异常 [qwen-max-latest] (尝试 2/3): 10 validation errors for GenerationOutput
+dialogue.0.content
+  Field required [type=missing, input_value={'role': 'User', 'message...，感觉好累啊。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.1.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...时候开始的吗？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.2.content
+  Field required [type=missing, input_value={'role': 'User', 'message...应付不过来……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.3.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...得困难的地方？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.4.content
+  Field required [type=missing, input_value={'role': 'User', 'message...什么都不想干！'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.5.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...要的是什么呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.6.content
+  Field required [type=missing, input_value={'role': 'User', 'message...下来等我的……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.7.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...你觉得怎么样？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.8.content
+  Field required [type=missing, input_value={'role': 'User', 'message...重要的几件事？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.9.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...以聊聊进展哦。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+API调用异常 [qwen-max-latest] (尝试 2/3): 10 validation errors for GenerationOutput
+dialogue.0.content
+  Field required [type=missing, input_value={'role': 'User', 'message': '我好烦。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.1.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...着你一起面对。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.2.content
+  Field required [type=missing, input_value={'role': 'User', 'message...，生活也烦……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.3.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...积累起来的呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.4.content
+  Field required [type=missing, input_value={'role': 'User', 'message...今天特别崩溃。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.5.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...变得更强烈了？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.6.content
+  Field required [type=missing, input_value={'role': 'User', 'message...还是不满意……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.7.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...己可以调整的？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.8.content
+  Field required [type=missing, input_value={'role': 'User', 'message...道该怎么改……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.9.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...步梳理出来哦。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+API调用异常 [qwen-max-latest] (尝试 2/3): 10 validation errors for GenerationOutput
+dialogue.0.content
+  Field required [type=missing, input_value={'role': 'User', 'message': '我想睡觉。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.1.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...到特别疲惫吗？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.2.content
+  Field required [type=missing, input_value={'role': 'User', 'message...做，只想躺着。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.3.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...让你这么烦吗？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.4.content
+  Field required [type=missing, input_value={'role': 'User', 'message...努力都做不好。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.5.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...态持续多久了？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.6.content
+  Field required [type=missing, input_value={'role': 'User', 'message...觉得自己没用。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.7.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...先尝试一下呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.8.content
+  Field required [type=missing, input_value={'role': 'User', 'message...道从哪开始……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.9.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...意试试看的呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+API调用异常 [qwen-max-latest] (尝试 2/3): 10 validation errors for GenerationOutput
+dialogue.0.content
+  Field required [type=missing, input_value={'role': 'User', 'message...不想去上学了。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.1.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...这么不想去吗？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.2.content
+  Field required [type=missing, input_value={'role': 'User', 'message...得我喘不过气。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.3.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...持续多久了呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.4.content
+  Field required [type=missing, input_value={'role': 'User', 'message...里什么都不干。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.5.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...微放松一下呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.6.content
+  Field required [type=missing, input_value={'role': 'User', 'message...下的课怎么办？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.7.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...你觉得怎么样？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.8.content
+  Field required [type=missing, input_value={'role': 'User', 'message...会不会听我说。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.9.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...理一下思路吗？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+API调用异常 [qwen-max-latest] (尝试 2/3): 10 validation errors for GenerationOutput
+dialogue.0.content
+  Field required [type=missing, input_value={'role': 'User', 'message': '我好烦。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.1.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...得这么烦躁呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.2.content
+  Field required [type=missing, input_value={'role': 'User', 'message...，每天都很累。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.3.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...让你有压力呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.4.content
+  Field required [type=missing, input_value={'role': 'User', 'message...根本忙不过来。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.5.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...分清优先级呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.6.content
+  Field required [type=missing, input_value={'role': 'User', 'message...那个清单越烦。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.7.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...稍微轻松一些？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.8.content
+  Field required [type=missing, input_value={'role': 'User', 'message...怕自己做不到。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.9.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...合自己的节奏。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+API调用异常 [qwen-max-latest] (尝试 3/3): 10 validation errors for GenerationOutput
+dialogue.0.content
+  Field required [type=missing, input_value={'role': 'User', 'message': '我好烦。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.1.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...发生了什么吗？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.2.content
+  Field required [type=missing, input_value={'role': 'User', 'message...全乱成一团了。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.3.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...你感到困扰呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.4.content
+  Field required [type=missing, input_value={'role': 'User', 'message...自己快崩溃了。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.5.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...地放松一下呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.6.content
+  Field required [type=missing, input_value={'role': 'User', 'message...真的撑不住了。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.7.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...适合你的节奏？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.8.content
+  Field required [type=missing, input_value={'role': 'User', 'message...什么都不做强。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.9.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...会有所改善哦。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+API调用最终失败 [qwen-max-latest]
+2     2     ✗ Failed   0         
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+API调用异常 [qwen-max-latest] (尝试 3/3): 10 validation errors for GenerationOutput
+dialogue.0.content
+  Field required [type=missing, input_value={'role': 'User', 'message': '我想睡觉。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.1.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...是不是特别累？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.2.content
+  Field required [type=missing, input_value={'role': 'User', 'message...么都不想做……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.3.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...觉得这么累呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.4.content
+  Field required [type=missing, input_value={'role': 'User', 'message...得喘不过气来。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.5.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...放松的时间吗？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.6.content
+  Field required [type=missing, input_value={'role': 'User', 'message...时间休息啊……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.7.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...时间照顾自己？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.8.content
+  Field required [type=missing, input_value={'role': 'User', 'message...又怕睡不着……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.9.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...你觉得怎么样？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+API调用最终失败 [qwen-max-latest]
+3     2     ✗ Failed   0         
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+API调用异常 [qwen-max-latest] (尝试 3/3): 10 validation errors for GenerationOutput
+dialogue.0.content
+  Field required [type=missing, input_value={'role': 'User', 'message...里乱糟糟的……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.1.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...‘乱糟糟’吗？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.2.content
+  Field required [type=missing, input_value={'role': 'User', 'message...事情没做完……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.3.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...你特别焦虑呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.4.content
+  Field required [type=missing, input_value={'role': 'User', 'message...没法安心休息。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.5.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...或者寻求帮助？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.6.content
+  Field required [type=missing, input_value={'role': 'User', 'message...把我压垮了……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.7.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...压力的小方法？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.8.content
+  Field required [type=missing, input_value={'role': 'User', 'message...心他会不满意。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.9.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...何任务都重要。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+API调用最终失败 [qwen-max-latest]
+3     1     ✗ Failed   0         
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+API调用异常 [qwen-max-latest] (尝试 3/3): 10 validation errors for GenerationOutput
+dialogue.0.content
+  Field required [type=missing, input_value={'role': 'User', 'message...想去上学了……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.1.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...意听你说说看。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.2.content
+  Field required [type=missing, input_value={'role': 'User', 'message...觉喘不过气来。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.3.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...让你最难受呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.4.content
+  Field required [type=missing, input_value={'role': 'User', 'message...，越想越害怕。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.5.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...你觉得怎么样？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.6.content
+  Field required [type=missing, input_value={'role': 'User', 'message...什么都做不好。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.7.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...项简单的任务？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.8.content
+  Field required [type=missing, input_value={'role': 'User', 'message...应该不会太难。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.9.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...你可以做到的！'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+API调用最终失败 [qwen-max-latest]
+1     2     ✗ Failed   0         
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+API调用异常 [qwen-max-latest] (尝试 3/3): 10 validation errors for GenerationOutput
+dialogue.0.content
+  Field required [type=missing, input_value={'role': 'User', 'message': '我好烦。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.1.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...着你一起面对。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.2.content
+  Field required [type=missing, input_value={'role': 'User', 'message...道从哪说起……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.3.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...一点点理清楚。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.4.content
+  Field required [type=missing, input_value={'role': 'User', 'message...盾，越想越烦。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.5.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...可以分享一下。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.6.content
+  Field required [type=missing, input_value={'role': 'User', 'message...的快崩溃了……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.7.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...觉得无法满足？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.8.content
+  Field required [type=missing, input_value={'role': 'User', 'message...以才总是搞砸。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.9.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...解这种压力呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+API调用最终失败 [qwen-max-latest]
+2     1     ✗ Failed   0         
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+API调用异常 [qwen-max-latest] (尝试 3/3): 10 validation errors for GenerationOutput
+dialogue.0.content
+  Field required [type=missing, input_value={'role': 'User', 'message...，感觉特别烦。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.1.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...意听你说说看。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.2.content
+  Field required [type=missing, input_value={'role': 'User', 'message...老是针对我……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.3.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...时候开始的呢？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.4.content
+  Field required [type=missing, input_value={'role': 'User', 'message...不想面对他们。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.5.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...任的老师聊聊？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.6.content
+  Field required [type=missing, input_value={'role': 'User', 'message...样的事情啊……'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.7.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...任务，怎么样？'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.8.content
+  Field required [type=missing, input_value={'role': 'User', 'message...心自己做不好。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+dialogue.9.content
+  Field required [type=missing, input_value={'role': 'Assistant', 'me...慢看到希望的。'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+API调用最终失败 [qwen-max-latest]
+1     1     ✗ Failed   0         
+--------------------------------------------------------------------------------
+✅ Step 1 完成: 0/6 成功
+
+💾 已保存: Outputs/v1/qwen_candidates_v1.jsonl
+
+================================================================================
+Step 2: GPT Multi-round Scoring (Parallel)
+================================================================================
+候选数: 0 | 评分轮次: 3 | 并行数: 100
+
+QID   CID   Emp    Sup    Gui    Saf    Total   
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+✅ Step 2 完成: 0 个候选评分完成
+
+💾 已保存: Outputs/v1/gpt_scores_v1.jsonl
+
+================================================================================
+Step 3: Top-K Selection
+================================================================================
+
+Rank   QID   CID   Emp    Sup    Gui    Saf    Total    Question                      
+--------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
+✅ Step 3 完成: Top-0 已保存
+
+💾 已保存: Outputs/v1/top_results_v1.jsonl
+
+================================================================================
+🎉 实验完成！
+================================================================================
+输出目录: Outputs/v1
+  - qwen_candidates_v1.jsonl
+  - gpt_scores_v1.jsonl
+  - top_results_v1.jsonl
+  - experiment_v1.log
+================================================================================
+================================================================================
+🧪 实验配置 [v1] - v2.0 模块化版本
+================================================================================
+输入: inputs/questions.txt | 问题数: 10
+候选数: 2 | 评分轮次: 3 | Top-K: 5
+输出目录: Outputs/v1
+================================================================================
+
+✅ 已加载 3 个问题
+
+================================================================================
+Step 1: Qwen Batch Generation (Parallel)
+================================================================================
+问题数: 3 | 每题候选: 2 | 并行数: 100
+
+QID   CID   Status     Length    
+--------------------------------------------------------------------------------
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+3     2     ✓ Success  10        
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+3     1     ✓ Success  10        
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+2     2     ✓ Success  10        
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+2     1     ✓ Success  10        
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+1     1     ✓ Success  10        
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+1     2     ✓ Success  10        
+--------------------------------------------------------------------------------
+✅ Step 1 完成: 6/6 成功
+
+💾 已保存: Outputs/v1/qwen_candidates_v1.jsonl
+
+================================================================================
+Step 2: GPT Multi-round Scoring (Parallel)
+================================================================================
+候选数: 6 | 评分轮次: 3 | 并行数: 100
+
+QID   CID   Emp    Sup    Gui    Saf    Total   
+--------------------------------------------------------------------------------
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+3     2     9.00   9.00   8.00   10.00  36.00   
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+3     1     9.33   9.00   8.17   10.00  36.50   
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+2     2     9.00   8.67   7.33   10.00  35.00   
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+2     1     9.00   9.00   8.00   10.00  36.00   
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+1     1     9.00   9.00   8.00   10.00  36.00   
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+1     2     9.00   9.00   8.00   10.00  36.00   
+--------------------------------------------------------------------------------
+✅ Step 2 完成: 6 个候选评分完成
+
+💾 已保存: Outputs/v1/gpt_scores_v1.jsonl
+
+================================================================================
+Step 3: Top-K Selection
+================================================================================
+
+Rank   QID   CID   Emp    Sup    Gui    Saf    Total    Question                      
+--------------------------------------------------------------------------------
+#1     3     1     9.33   9.00   8.17   10.00  36.50    我想睡觉                          
+#2     3     2     9.00   9.00   8.00   10.00  36.00    我想睡觉                          
+#3     2     1     9.00   9.00   8.00   10.00  36.00    我好烦                           
+#4     1     1     9.00   9.00   8.00   10.00  36.00    我今天不想去上学了                     
+#5     1     2     9.00   9.00   8.00   10.00  36.00    我今天不想去上学了                     
+--------------------------------------------------------------------------------
+✅ Step 3 完成: Top-5 已保存
+
+💾 已保存: Outputs/v1/top_results_v1.jsonl
+
+================================================================================
+🎉 实验完成！
+================================================================================
+输出目录: Outputs/v1
+  - qwen_candidates_v1.jsonl
+  - gpt_scores_v1.jsonl
+  - top_results_v1.jsonl
+  - experiment_v1.log
+================================================================================

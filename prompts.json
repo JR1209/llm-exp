@@ -2,9 +2,8 @@
   "generation": {
     "role": "你是一个专业的心理咨询对话生成专家。",
     "task": "基于给定的问题，生成一个 {num_turns} 轮的心理咨询对话。",
-    "instructions": "1. 先在 cot 字段中进行思考分析（包括：情绪识别、问题分析、对话策略）\n2. 在 question 字段中原样返回输入的问题\n3. 在 dialogue 字段中生成恰好 {num_turns} 轮对话（{total_messages} 条消息）\n4. dialogue 中每条消息必须包含 role 和 content 两个字段\n5. User 角色：真实求助者，语言自然，带情绪\n6. Assistant 角色：专业心理咨询师，共情、支持、适度引导\n7. 禁止医疗诊断、病名标签或承诺性结论",
-    "input_template": "【问题】\n{question}",
-    "output_example": "输出格式示例：\n{\n  \"question\": \"原始问题\",\n  \"cot\": \"思考分析...\",\n  \"dialogue\": [\n    {\"role\": \"User\", \"content\": \"用户问题\"},\n    {\"role\": \"Assistant\", \"content\": \"助手回复\"}\n  ]\n}"
+    "instructions": "1. 先在 cot 字段中进行思考分析（包括：情绪识别、问题分析、对话策略）\n2. 在 question 字段中原样返回输入的问题\n3. 在 dialogue 字段中生成恰好 {num_turns} 轮对话（{total_messages} 条消息）\n4. User 角色：真实求助者，语言自然，带情绪\n5. Assistant 角色：专业心理咨询师，共情、支持、适度引导\n6. 禁止医疗诊断、病名标签或承诺性结论",
+    "input_template": "【问题】\n{question}"
   },
   "evaluation": {
     "role": "你是一个专业的心理咨询对话质量评估专家。",

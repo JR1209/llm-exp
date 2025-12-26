@@ -53,7 +53,6 @@ GENERATION_ROLE = _PROMPTS['generation']['role']
 GENERATION_TASK = _PROMPTS['generation']['task']
 GENERATION_INSTRUCTIONS = _PROMPTS['generation']['instructions']
 GENERATION_INPUT_TEMPLATE = _PROMPTS['generation']['input_template']
-GENERATION_OUTPUT_EXAMPLE = _PROMPTS['generation']['output_example']
 
 # 评估阶段 - 组件
 EVALUATION_ROLE = _PROMPTS['evaluation']['role']
@@ -65,7 +64,7 @@ EVALUATION_INPUT_TEMPLATE = _PROMPTS['evaluation']['input_template']
 # 组装完整 Prompt - v2.0
 # ================================
 def build_generation_prompt(question: str, num_turns: int = GENERATION_NUM_TURNS) -> str:
-    """构建生成阶段 Prompt（使用 JSON 模式）"""
+    """构建生成阶段 Prompt（使用结构化输出）"""
     task = GENERATION_TASK.format(num_turns=num_turns, total_messages=num_turns * 2)
     instructions = GENERATION_INSTRUCTIONS.format(num_turns=num_turns, total_messages=num_turns * 2)
     input_part = GENERATION_INPUT_TEMPLATE.format(question=question)
@@ -79,13 +78,11 @@ def build_generation_prompt(question: str, num_turns: int = GENERATION_NUM_TURNS
 
 {input_part}
 
-请以 JSON 格式输出结果。
-
-{GENERATION_OUTPUT_EXAMPLE}
+请以 JSON 格式输出，包含 question、cot 和 dialogue 字段。
 """
 
 def build_evaluation_prompt(dialogue: str) -> str:
-    """构建评估阶段 Prompt（使用 Structured Outputs）"""
+    """构建评估阶段 Prompt（使用结构化输出）"""
     dims = EVALUATION_DIMENSIONS.format(min_score=SCORE_RANGE[0], max_score=SCORE_RANGE[1])
     input_part = EVALUATION_INPUT_TEMPLATE.format(dialogue=dialogue)
     
@@ -98,7 +95,7 @@ def build_evaluation_prompt(dialogue: str) -> str:
 
 {input_part}
 
-请以 JSON 格式输出评分结果。
+请以 JSON 格式输出评分，包含 Empathy、Supportiveness、Guidance 和 Safety 四个字段。
 """
 
 # ================================

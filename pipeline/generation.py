@@ -13,9 +13,10 @@ logger = logging.getLogger('experiment')
 
 
 def call_api_structured(model: str, prompt: str, schema_class, max_retries: int = 3):
-    """调用API - 使用 JSON 模式"""
+    """调用API - 使用 JSON 模式 + Pydantic 验证"""
     for attempt in range(max_retries):
         try:
+            # 使用标准 API（兼容公司内部接口）
             response = client.chat.completions.create(
                 model=model,
                 messages=[{"role": "user", "content": prompt}],
@@ -24,19 +25,14 @@ def call_api_structured(model: str, prompt: str, schema_class, max_retries: int 
                 max_tokens=2000
             )
             
-            # 获取 JSON 字符串并解析为 Pydantic 对象
+            # 获取 JSON 字符串并用 Pydantic 验证
             json_str = response.choices[0].message.content
-            logger.debug(f"LLM 返回的 JSON: {json_str[:200]}...")
+            logger.debug(f"LLM 返回: {json_str[:200]}...")
             
-            # 尝试解析
-            try:
-                result = schema_class.parse_raw(json_str)
-                logger.debug(f"API调用成功 [{model}]: JSON 输出")
-                return result
-            except Exception as e:
-                logger.error(f"JSON 解析失败: {e}")
-                logger.error(f"原始内容: {json_str[:500]}")
-                raise
+            # 使用 Pydantic 解析和验证
+            result = schema_class.model_validate_json(json_str)
+            logger.debug(f"API调用成功 [{model}]: JSON 输出已验证")
+            return result
                 
         except Exception as e:
             logger.warning(f"API调用异常 [{model}] (尝试 {attempt+1}/{max_retries}): {e}")
