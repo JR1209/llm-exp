@@ -8,7 +8,7 @@ from pathlib import Path
 # ================================
 # API配置
 # ================================
-API_KEY = "sk-Pz9c6awbV846oRqlNOrkqsggMteTxoDRnGMsSf0RAni"
+API_KEY = "sk-CFDseWkWcsHiMu6mDlQc8elM3sJTFQyMEsJxhFb6qJ8"
 API_BASE_URL = "https://live-turing.cn.llm.tcljd.com/api/v1"
 
 # ================================

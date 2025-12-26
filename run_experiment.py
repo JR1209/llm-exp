@@ -7,7 +7,6 @@ Step 3: 选择Top-K
 """
 
 import json
-import requests
 import argparse
 import time
 import logging
@@ -18,7 +17,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 import os
 
 from config import (
-    API_KEY, API_BASE_URL,
+    client,
     QWEN_MODEL, GPT_MODEL,
     QWEN_GENERATION_PROMPT,
     GPT_SCORING_PROMPT
@@ -55,42 +54,24 @@ logger = None
 # ============================================
 
 def call_api(model: str, prompt: str, max_retries: int = 3) -> str:
-    """调用API"""
-    url = f"{API_BASE_URL}/chat/completions"
-    headers = {
-        "Authorization": f"Bearer {API_KEY}",
-        "Content-Type": "application/json"
-    }
-    
+    """调用API - 使用 OpenAI SDK"""
     for attempt in range(max_retries):
         try:
-            response = requests.post(
-                url,
-                headers=headers,
-                json={
-                    "model": model,
-                    "messages": [{"role": "user", "content": prompt}],
-                    "temperature": 0.7,
-                    "max_tokens": 2000
-                },
-                timeout=120
+            response = client.chat.completions.create(
+                model=model,
+                messages=[{"role": "user", "content": prompt}],
+                temperature=0.7,
+                max_tokens=2000
             )
             
-            if response.status_code == 200:
-                result = response.json()["choices"][0]["message"]["content"]
-                if logger:
-                    logger.debug(f"API调用成功 [{model}]: {len(result)} 字符")
-                return result
-            else:
-                if logger:
-                    logger.warning(f"API调用失败 [{model}]: HTTP {response.status_code}")
-            
-            if attempt < max_retries - 1:
-                time.sleep(2)
+            result = response.choices[0].message.content
+            if logger:
+                logger.debug(f"API调用成功 [{model}]: {len(result)} 字符")
+            return result
                 
         except Exception as e:
             if logger:
-                logger.warning(f"API调用异常 [{model}]: {e}")
+                logger.warning(f"API调用异常 [{model}] (尝试 {attempt+1}/{max_retries}): {e}")
             if attempt < max_retries - 1:
                 time.sleep(2)
     
