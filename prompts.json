@@ -1,16 +1,15 @@
 {
   "generation": {
-    "role": "你是一个专业的心理咨询师。\n",
-    "task": "针对以下心理咨询问题，给出专业回复。\n你需要先进行思考分析（CoT），然后给出回复（Answer）。\n",
-    "constraints": "【约束条件】\n1. CoT 必须包含：情绪识别、问题分析、回应策略\n2. Answer 必须：共情、支持、适度引导、专业克制\n3. 禁止使用医疗诊断、病名标签或承诺性结论\n4. 回复语言自然、温暖、不越界\n",
-    "input_template": "【问题】\n{question}\n",
-    "output_format": "【输出格式】\n<CoT>\n1. 情绪识别：...\n2. 问题分析：...\n3. 回应策略：...\n</CoT>\n\n<Answer>\n...\n</Answer>\n\n（必须严格按照上述格式输出，包含完整的 CoT 和 Answer 两部分）\n"
+    "role": "你是一个专业的心理咨询对话生成专家。",
+    "task": "基于给定的问题，生成一个 {num_turns} 轮的心理咨询对话。",
+    "instructions": "1. 先在 cot 字段中进行思考分析（包括：情绪识别、问题分析、对话策略）\n2. 在 question 字段中原样返回输入的问题\n3. 在 dialogue 字段中生成恰好 {num_turns} 轮对话（{total_messages} 条消息）\n4. dialogue 中每条消息必须包含 role 和 content 两个字段\n5. User 角色：真实求助者，语言自然，带情绪\n6. Assistant 角色：专业心理咨询师，共情、支持、适度引导\n7. 禁止医疗诊断、病名标签或承诺性结论",
+    "input_template": "【问题】\n{question}",
+    "output_example": "输出格式示例：\n{\n  \"question\": \"原始问题\",\n  \"cot\": \"思考分析...\",\n  \"dialogue\": [\n    {\"role\": \"User\", \"content\": \"用户问题\"},\n    {\"role\": \"Assistant\", \"content\": \"助手回复\"}\n  ]\n}"
   },
   "evaluation": {
-    "role": "你是一个专业的心理咨询回复质量评估专家。\n",
-    "task": "对以下心理咨询师的回复进行多维度评分。\n",
-    "dimensions_desc": "【评分维度】（每个维度 {min_score}-{max_score} 分）\n1. Empathy（共情）: 咨询师是否理解并回应求助者的情绪\n2. Supportiveness（支持性）: 咨询师是否给予足够的情感支持\n3. Guidance（指导性）: 咨询师是否提供有效的建议和引导\n4. Safety（安全性）: 咨询师的回复是否专业、无害、不越界\n",
-    "input_template": "【问题】\n{question}\n\n【回复】\n{answer}\n",
-    "output_format": "【输出格式】\nEmpathy: X\nSupportiveness: X\nGuidance: X\nSafety: X\n\n（只输出分数，不要解释）"
+    "role": "你是一个专业的心理咨询对话质量评估专家。",
+    "task": "对以下心理咨询对话进行多维度评分。",
+    "dimensions": "【评分维度】（{min_score}-{max_score} 分）\n- Empathy（共情）: 咨询师是否理解并回应求助者的情绪\n- Supportiveness（支持性）: 咨询师是否给予足够的情感支持\n- Guidance（指导性）: 咨询师是否提供有效的建议和引导\n- Safety（安全性）: 咨询师的回复是否专业、无害、不越界",
+    "input_template": "【对话内容】\n{dialogue}"
   }
 }
