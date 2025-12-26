@@ -2,14 +2,22 @@
 实验配置文件
 Prompt Pipeline v2.0 - 结构化改造版本
 """
+import os
 import yaml
 from pathlib import Path
+from openai import OpenAI
 
 # ================================
 # API配置
 # ================================
 API_KEY = "sk-CFDseWkWcsHiMu6mDlQc8elM3sJTFQyMEsJxhFb6qJ8"
 API_BASE_URL = "https://live-turing.cn.llm.tcljd.com/api/v1"
+
+# 初始化 OpenAI 客户端（兼容公司 API）
+client = OpenAI(
+    api_key=API_KEY,
+    base_url=API_BASE_URL
+)
 
 # ================================
 # 模型配置
