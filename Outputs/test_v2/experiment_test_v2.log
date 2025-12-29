@@ -1,0 +1,74 @@
+================================================================================
+🧪 实验配置 [test_v2] - 异步版本 + MLflow
+================================================================================
+输入: /data/zl.zhang/Code_test/inputs/questions.txt | 问题数: 2
+候选数: 2 | 评分轮次: 3 | Top-K: 5
+输出目录: /data/zl.zhang/Code_test/Outputs/test_v2
+================================================================================
+
+✅ 已加载 2 个问题
+
+================================================================================
+Step 1: Qwen Batch Generation (Async)
+================================================================================
+问题数: 2 | 每题候选: 2
+
+QID   CID   Status     Length    
+--------------------------------------------------------------------------------
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+1     1     ✓ Success  10        
+1     2     ✓ Success  8         
+2     1     ✓ Success  8         
+2     2     ✓ Success  8         
+--------------------------------------------------------------------------------
+✅ Step 1 完成: 4/4 成功
+
+💾 已保存原始数据: /data/zl.zhang/Code_test/Outputs/test_v2/qwen_candidates_raw_test_v2.json
+💾 已保存生成结果: /data/zl.zhang/Code_test/Outputs/test_v2/1_generation_test_v2.json
+
+================================================================================
+Step 2: GPT Multi-round Scoring (Async)
+================================================================================
+候选数: 4 | 评分轮次: 3
+
+QID   CID   Emp    Sup    Gui    Saf    Total   
+--------------------------------------------------------------------------------
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+1     1     9.00   9.00   8.00   10.00  36.00   
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+1     2     6.33   6.33   5.67   6.67   25.00   
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+2     1     9.00   9.00   8.00   10.00  36.00   
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+HTTP Request: POST https://live-turing.cn.llm.tcljd.com/api/v1/chat/completions "HTTP/1.1 200 OK"
+2     2     7.67   7.67   7.00   8.33   30.67   
+--------------------------------------------------------------------------------
+✅ Step 2 完成: 4 个候选评分完成
+
+💾 已保存原始评分: /data/zl.zhang/Code_test/Outputs/test_v2/gpt_scores_raw_test_v2.json
+💾 已保存评分结果: /data/zl.zhang/Code_test/Outputs/test_v2/2_scores_test_v2.json
+
+📊 平均分数:
+  Empathy: 8.00
+  Supportiveness: 8.00
+  Guidance: 7.17
+  Safety: 8.75
+  Total: 31.92
+💾 已保存最终结果: /data/zl.zhang/Code_test/Outputs/test_v2/3_final_results_test_v2.json
+
+================================================================================
+🎉 实验完成！
+================================================================================
+输出目录: /data/zl.zhang/Code_test/Outputs/test_v2
+📊 MLflow Run ID: f0ea74e2d9d94c34a5a785ce235b367d
+================================================================================

@@ -1,0 +1,14 @@
+nohup: 忽略输入
+Registry store URI not provided. Using backend store URI.
+2025/12/29 15:18:44 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2025/12/29 15:18:44 INFO mlflow.store.db.utils: Updating database tables
+2025/12/29 15:18:44 INFO alembic.runtime.migration: Context impl SQLiteImpl.
+2025/12/29 15:18:44 INFO alembic.runtime.migration: Will assume non-transactional DDL.
+2025/12/29 15:18:44 INFO alembic.runtime.migration: Context impl SQLiteImpl.
+2025/12/29 15:18:44 INFO alembic.runtime.migration: Will assume non-transactional DDL.
+2025/12/29 15:18:44 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2025/12/29 15:18:44 INFO mlflow.store.db.utils: Updating database tables
+2025/12/29 15:18:44 INFO alembic.runtime.migration: Context impl SQLiteImpl.
+2025/12/29 15:18:44 INFO alembic.runtime.migration: Will assume non-transactional DDL.
+[MLflow] Security middleware enabled with default settings (localhost-only). To allow connections from other hosts, use --host 0.0.0.0 and configure --allowed-hosts and --cors-allowed-origins.
+ERROR:    [Errno 98] Address already in use

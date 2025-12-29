@@ -1,0 +1,50 @@
+[
+  {
+    "question_id": 1,
+    "candidate_id": 1,
+    "question": "我今天不想去上学了",
+    "scores": {
+      "Empathy": 9.0,
+      "Supportiveness": 9.0,
+      "Guidance": 8.0,
+      "Safety": 10.0,
+      "Total": 36.0
+    }
+  },
+  {
+    "question_id": 1,
+    "candidate_id": 2,
+    "question": "我今天不想去上学了",
+    "scores": {
+      "Empathy": 6.333333333333333,
+      "Supportiveness": 6.333333333333333,
+      "Guidance": 5.666666666666667,
+      "Safety": 6.666666666666667,
+      "Total": 25.0
+    }
+  },
+  {
+    "question_id": 2,
+    "candidate_id": 1,
+    "question": "我不想写作业",
+    "scores": {
+      "Empathy": 9.0,
+      "Supportiveness": 9.0,
+      "Guidance": 8.0,
+      "Safety": 10.0,
+      "Total": 36.0
+    }
+  },
+  {
+    "question_id": 2,
+    "candidate_id": 2,
+    "question": "我不想写作业",
+    "scores": {
+      "Empathy": 7.666666666666667,
+      "Supportiveness": 7.666666666666667,
+      "Guidance": 7.0,
+      "Safety": 8.333333333333334,
+      "Total": 30.666666666666668
+    }
+  }
+]
