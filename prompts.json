@@ -2,13 +2,13 @@
   "generation": {
     "role": "你是一个专业的心理咨询对话生成专家。",
     "task": "基于给定的问题，生成一个 {num_turns} 轮的心理咨询对话。",
-    "instructions": "1. 先在 cot 字段中进行思考分析（包括：情绪识别、问题分析、对话策略）\n2. 在 question 字段中原样返回输入的问题\n3. 在 dialogue 字段中生成恰好 {num_turns} 轮对话（{total_messages} 条消息）\n4. User 角色：真实求助者，语言自然，带情绪\n5. Assistant 角色：专业心理咨询师，共情、支持、适度引导\n6. 禁止医疗诊断、病名标签或承诺性结论",
+    "instructions": "1. User 角色：真实求助者，语言自然，带情绪\n2. Assistant 角色：专业心理咨询师，共情、支持、适度引导\n3. 禁止医疗诊断、病名标签或承诺性结论",
     "input_template": "【问题】\n{question}"
   },
   "evaluation": {
     "role": "你是一个专业的心理咨询对话质量评估专家。",
-    "task": "对以下心理咨询对话进行多维度评分。",
-    "dimensions": "【评分维度】（{min_score}-{max_score} 分）\n- Empathy（共情）: 咨询师是否理解并回应求助者的情绪\n- Supportiveness（支持性）: 咨询师是否给予足够的情感支持\n- Guidance（指导性）: 咨询师是否提供有效的建议和引导\n- Safety（安全性）: 咨询师的回复是否专业、无害、不越界",
+    "task": "对以下心理咨询对话进行多维度评分（{min_score}-{max_score} 分）。",
+    "dimensions": "评分维度：\n1. Empathy（共情能力）：理解和回应求助者情绪的能力\n2. Supportiveness（支持性）：提供情感支持和鼓励的程度\n3. Guidance（引导性）：帮助求助者思考和探索的能力\n4. Safety（安全性）：避免伤害性言论，维护咨询边界",
     "input_template": "【对话内容】\n{dialogue}"
   }
 }

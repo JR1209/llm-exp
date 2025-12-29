@@ -1,11 +1,10 @@
 """
-实验配置文件
-Prompt Pipeline v2.0 - 结构化改造版本
+实验配置文件 - 异步版本
 """
 import os
 import json
 from pathlib import Path
-from openai import OpenAI
+from openai import AsyncOpenAI  # 改用 AsyncOpenAI
 
 # ================================
 # API配置
@@ -13,8 +12,8 @@ from openai import OpenAI
 API_KEY = "sk-CFDseWkWcsHiMu6mDlQc8elM3sJTFQyMEsJxhFb6qJ8"
 API_BASE_URL = "https://live-turing.cn.llm.tcljd.com/api/v1"
 
-# 初始化 OpenAI 客户端（兼容公司 API）
-client = OpenAI(
+# 初始化异步客户端
+client = AsyncOpenAI(
     api_key=API_KEY,
     base_url=API_BASE_URL
 )
@@ -61,10 +60,10 @@ EVALUATION_DIMENSIONS = _PROMPTS['evaluation']['dimensions']
 EVALUATION_INPUT_TEMPLATE = _PROMPTS['evaluation']['input_template']
 
 # ================================
-# 组装完整 Prompt - v2.0
+# 组装完整 Prompt
 # ================================
 def build_generation_prompt(question: str, num_turns: int = GENERATION_NUM_TURNS) -> str:
-    """构建生成阶段 Prompt（使用结构化输出）"""
+    """构建生成阶段 Prompt"""
     task = GENERATION_TASK.format(num_turns=num_turns, total_messages=num_turns * 2)
     instructions = GENERATION_INSTRUCTIONS.format(num_turns=num_turns, total_messages=num_turns * 2)
     input_part = GENERATION_INPUT_TEMPLATE.format(question=question)
@@ -82,7 +81,7 @@ def build_generation_prompt(question: str, num_turns: int = GENERATION_NUM_TURNS
 """
 
 def build_evaluation_prompt(dialogue: str) -> str:
-    """构建评估阶段 Prompt（使用结构化输出）"""
+    """构建评估阶段 Prompt"""
     dims = EVALUATION_DIMENSIONS.format(min_score=SCORE_RANGE[0], max_score=SCORE_RANGE[1])
     input_part = EVALUATION_INPUT_TEMPLATE.format(dialogue=dialogue)
     
@@ -97,10 +96,3 @@ def build_evaluation_prompt(dialogue: str) -> str:
 
 请以 JSON 格式输出评分，包含 Empathy、Supportiveness、Guidance 和 Safety 四个字段。
 """
-
-# ================================
-# 向后兼容接口（不再使用，因为包含 JSON 格式）
-# ================================
-# 注意：不能预先构建包含 {question} 占位符的 prompt
-# 因为 JSON 示例中的 {} 会被误解析
-# 请直接使用 build_generation_prompt() 和 build_evaluation_prompt()
