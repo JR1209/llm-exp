@@ -367,15 +367,10 @@ function showResults() {
     const totalQuestions = resultData.length;
     const totalDialogues = resultData.length;
     
-    // 计算平均分（兼容两种数据结构）
-    const avgScore = resultData.reduce((sum, item) => {
-        const score = item.scores?.Total || item.avg_score || 0;
-        return sum + score;
-    }, 0) / totalQuestions;
-    
+    // 新格式: 3_final_results 没有分数字段，只显示问题数
     document.getElementById('totalQuestions').textContent = totalQuestions;
     document.getElementById('totalDialogues').textContent = totalDialogues;
-    document.getElementById('avgScore').textContent = avgScore.toFixed(2);
+    document.getElementById('avgScore').textContent = '已选最优';
     
     resultContainer.classList.add('show');
 }
@@ -387,45 +382,20 @@ function downloadResults() {
         return;
     }
     
-    console.log('原始评分数据示例:', resultData[0]); // 调试用
+    console.log('最终结果数据示例:', resultData[0]); // 调试用
     
-    // 直接下载评分结果（gpt_scores 格式）
-    // 格式：包含所有候选对话和它们的评分
-    const formattedResults = resultData.map((item, index) => {
-        const scores = item.scores || {};
-        const output = item.output || {};
-        
-        // 提取对话内容
-        let dialogue = '';
-        if (output.dialogue) {
-            if (Array.isArray(output.dialogue)) {
-                // JSON 格式：[{role: "User", content: "..."}, ...]
-                dialogue = output.dialogue.map(msg => 
-                    `${msg.role}: ${msg.content}`
-                ).join('\n');
-            } else if (typeof output.dialogue === 'string') {
-                // 纯文本格式
-                dialogue = output.dialogue;
-            }
-        }
-        
-        return {
-            id: index + 1,
-            question_id: item.question_id,
-            candidate_id: item.candidate_id,
-            question: item.question || output.question || '',
-            answer: dialogue,
-            scores: {
-                empathy: scores.Empathy || 0,
-                supportiveness: scores.Supportiveness || 0,
-                guidance: scores.Guidance || 0,
-                safety: scores.Safety || 0,
-                total: scores.Total || 0
-            },
-            cot: output.cot || null,
-            version: experimentVersion
-        };
-    });
+    // resultData 已经是格式化后的最终结果
+    // 格式: {question_id, question, cot, answer}
+    // 每个问题只有一条最高分的记录
+    
+    const formattedResults = resultData.map((item, index) => ({
+        id: index + 1,
+        question_id: item.question_id,
+        question: item.question || '',
+        cot: item.cot || '',
+        answer: item.answer || '',
+        version: experimentVersion
+    }));
     
     // 创建下载链接
     const dataStr = JSON.stringify(formattedResults, null, 2);
@@ -434,11 +404,11 @@ function downloadResults() {
     
     const link = document.createElement('a');
     link.href = url;
-    link.download = `qa_scores_${experimentVersion}.json`;
+    link.download = `final_results_${experimentVersion}.json`;
     link.click();
     
     URL.revokeObjectURL(url);
-    showAlert(`评分结果已下载 (${formattedResults.length} 条记录，包含完整对话)`, 'success');
+    showAlert(`最终结果已下载 (${formattedResults.length} 个问题，每题最高分)`, 'success');
 }
 
 // 更新进度

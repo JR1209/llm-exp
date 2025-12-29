@@ -1,5 +1,4 @@
-#-oneline
-!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Flask API 服务器
 为 Vue 前端提供 RESTful API
@@ -79,7 +78,7 @@ def run_experiment():
         output_dir.mkdir(parents=True, exist_ok=True)
         
         cmd = [
-            'python3', '运行.py',
+            'python3', '运行_async.py',
             '--limit', str(limit),
             '--candidates', str(candidates),
             '--score-rounds', str(score_rounds),
@@ -140,9 +139,9 @@ def get_experiment_status(version):
             return jsonify({'success': True, 'status': 'not_started'})
         
         # 检查各个阶段的输出文件
-        candidates_file = output_dir / f'qwen_candidates_{version}.jsonl'
-        scores_file = output_dir / f'gpt_scores_{version}.jsonl'
-        top_file = output_dir / f'top_results_{version}.jsonl'
+        candidates_file = output_dir / f'1_generation_{version}.json'
+        scores_file = output_dir / f'2_scores_{version}.json'
+        top_file = output_dir / f'3_final_results_{version}.json'
         log_file = output_dir / 'experiment.log'
         
         status = {
@@ -192,37 +191,62 @@ def get_experiment_log(version):
 
 @app.route('/api/results/<version>/scores', methods=['GET'])
 def get_scores(version):
-    """获取评分结果"""
+    """获取最终结果（每个问题的最高分）"""
     try:
-        file_path = f'Outputs/{version}/gpt_scores_{version}.jsonl'
+        # 优先返回最终结果文件
+        file_path = f'Outputs/{version}/3_final_results_{version}.json'
         if not os.path.exists(file_path):
             return jsonify({'success': False, 'error': '文件不存在'}), 404
         
-        scores = []
         with open(file_path, 'r', encoding='utf-8') as f:
-            for line in f:
-                if line.strip():
-                    scores.append(json.loads(line))
+            results = json.load(f)
         
-        return jsonify({'success': True, 'data': scores})
+        return jsonify({'success': True, 'data': results})
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
 
 @app.route('/api/results/<version>/top', methods=['GET'])
 def get_top_results(version):
-    """获取Top-K结果"""
+    """获取最终结果"""
     try:
-        file_path = f'Outputs/{version}/top_results_{version}.jsonl'
+        file_path = f'Outputs/{version}/3_final_results_{version}.json'
         if not os.path.exists(file_path):
             return jsonify({'success': False, 'error': '文件不存在'}), 404
         
-        top_results = []
         with open(file_path, 'r', encoding='utf-8') as f:
-            for line in f:
-                if line.strip():
-                    top_results.append(json.loads(line))
+            final_results = json.load(f)
         
-        return jsonify({'success': True, 'data': top_results})
+        return jsonify({'success': True, 'data': final_results})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@app.route('/api/results/<version>/generation', methods=['GET'])
+def get_generation(version):
+    """获取生成结果"""
+    try:
+        file_path = f'Outputs/{version}/1_generation_{version}.json'
+        if not os.path.exists(file_path):
+            return jsonify({'success': False, 'error': '文件不存在'}), 404
+        
+        with open(file_path, 'r', encoding='utf-8') as f:
+            generation = json.load(f)
+        
+        return jsonify({'success': True, 'data': generation})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@app.route('/api/results/<version>/detailed_scores', methods=['GET'])
+def get_detailed_scores(version):
+    """获取详细评分结果"""
+    try:
+        file_path = f'Outputs/{version}/2_scores_{version}.json'
+        if not os.path.exists(file_path):
+            return jsonify({'success': False, 'error': '文件不存在'}), 404
+        
+        with open(file_path, 'r', encoding='utf-8') as f:
+            scores = json.load(f)
+        
+        return jsonify({'success': True, 'data': scores})
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
 
