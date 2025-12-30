@@ -20,7 +20,45 @@ Code/
         ├── top_results_v1.jsonl
         └── experiment_v1.log
 ```
+存储位置总览：
 
+  1. SQLite数据库
+    - 路径：/data/zl.zhang/Code_test/mlflow.db
+    - 大小：528KB
+    - 内容：MLflow的元数据（run_id、参数、指标、文件路径等）
+  2. MLflow实验文件
+    - 路径：/data/zl.zhang/Code_test/mlruns/
+    - 大小：72KB
+    - 内容：实际的文件（JSON输出、代码快照、输入文件）
+  3. Git仓库
+    - 路径：/data/zl.zhang/Code_test/.git/
+    - 内容：代码版本历史
+
+  数据流关系：
+  - SQLite记录："实验A的输出文件在mlruns/0/abc123/artifacts/outputs/result.json"
+  - 文件系统存储：实际的result.json文件内容
+  - Git记录：代码的版本变更历史
+  
+端口启动
+# 启动 MLflow UI (端口 9001)
+nohup mlflow ui --host 0.0.0.0 --port 9001 > mlflow_9001.log 2>&1 &
+
+# 启动 Datasette SQLite 可视化 (端口 8001)
+nohup datasette experiments.db --host 0.0.0.0 --port 8001 > datasette_8001.log 2>&1 &
+
+# 关闭 MLflow (9001)
+pkill -f "mlflow ui.*9001"
+
+# 关闭 Datasette (8001)
+pkill -f "datasette.*8001"
+
+# 或者一次性关闭所有
+pkill -f "mlflow ui"
+pkill -f datasette
+
+# 用 localhost
+http://localhost:9001
+http://localhost:8001
 ## 🎯 版本管理策略
 
 ### Git管理（代码和配置）

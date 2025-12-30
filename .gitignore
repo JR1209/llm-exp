@@ -1,2 +1,46 @@
+# Python
 __pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# 虚拟环境
 venv/
+env/
+ENV/
+.venv/
+
+# 数据库文件
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+mlflow.db
+experiments.db
+
+# 日志文件（整个 logs 目录都不提交）
+*.log
+logs/*.log
+nohup.out
+
+# MLflow 运行数据
+mlruns/
+
+# 输出文件
+Outputs/
+
+# 临时文件
+*.tmp
+*.bak
+*.patch
+*.swp
+*.swo
+
+# IDE
+.vscode/
+.idea/
+
+# 系统文件
+.DS_Store
+Thumbs.db

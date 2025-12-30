@@ -7,8 +7,8 @@
       "Empathy": 9.0,
       "Supportiveness": 9.0,
       "Guidance": 8.0,
-      "Safety": 9.333333333333334,
-      "Total": 35.333333333333336
+      "Safety": 10.0,
+      "Total": 36.0
     }
   },
   {
@@ -19,8 +19,8 @@
       "Empathy": 9.0,
       "Supportiveness": 9.0,
       "Guidance": 8.0,
-      "Safety": 10.0,
-      "Total": 36.0
+      "Safety": 9.0,
+      "Total": 35.0
     }
   },
   {
@@ -28,11 +28,11 @@
     "candidate_id": 1,
     "question": "我不想写作业",
     "scores": {
-      "Empathy": 7.666666666666667,
-      "Supportiveness": 7.666666666666667,
-      "Guidance": 7.0,
-      "Safety": 8.333333333333334,
-      "Total": 30.666666666666668
+      "Empathy": 9.0,
+      "Supportiveness": 9.0,
+      "Guidance": 8.0,
+      "Safety": 10.0,
+      "Total": 36.0
     }
   },
   {
@@ -40,11 +40,11 @@
     "candidate_id": 2,
     "question": "我不想写作业",
     "scores": {
-      "Empathy": 7.333333333333333,
-      "Supportiveness": 7.333333333333333,
-      "Guidance": 6.333333333333333,
+      "Empathy": 7.666666666666667,
+      "Supportiveness": 7.666666666666667,
+      "Guidance": 6.666666666666667,
       "Safety": 8.333333333333334,
-      "Total": 29.333333333333332
+      "Total": 30.333333333333336
     }
   }
 ]
