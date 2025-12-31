@@ -27,12 +27,37 @@ const singleModelSelection = document.getElementById('singleModelSelection');
 const dualModelSelection = document.getElementById('dualModelSelection');
 const singleModel = document.getElementById('singleModel');
 const singleDialogueRounds = document.getElementById('singleDialogueRounds');
+const singleCandidates = document.getElementById('singleCandidates');
 const userModel = document.getElementById('userModel');
 const agentModel = document.getElementById('agentModel');
 const dialogueRounds = document.getElementById('dialogueRounds');
+const dualCandidates = document.getElementById('dualCandidates');
+
+// 新增：打分模式元素
+const scoringModeRadios = document.querySelectorAll('input[name="scoringMode"]');
+const scoringModel = document.getElementById('scoringModel');
+const scoreRounds = document.getElementById('scoreRounds');
+const topK = document.getElementById('topK');
+
+// 新增：Prompt相关元素
+const generationPromptText = document.getElementById('generationPromptText');
+const uploadGenPromptBtn = document.getElementById('uploadGenPromptBtn');
+const clearGenPromptBtn = document.getElementById('clearGenPromptBtn');
+const scoringPromptText = document.getElementById('scoringPromptText');
+const uploadScorePromptBtn = document.getElementById('uploadScorePromptBtn');
+const clearScorePromptBtn = document.getElementById('clearScorePromptBtn');
+
+// 新增：侧边栏按钮
+const jsonDiffBtn = document.getElementById('jsonDiffBtn');
 
 // 可用模型列表
 let availableModels = {};
+
+// Prompt输入模式和文件内容
+let genPromptMode = 'text'; // 'text' 或 'file'
+let scorePromptMode = 'text';
+let genPromptFileContent = null;
+let scorePromptFileContent = null;
 
 // 日志更新定时器
 let logUpdateInterval = null;
@@ -41,6 +66,9 @@ let logUpdateInterval = null;
 document.addEventListener('DOMContentLoaded', () => {
     setupEventListeners();
     loadAvailableModels();
+    initPromptTabs();
+    initGenPromptFileUpload();
+    initScorePromptFileUpload();
 });
 
 // 设置事件监听
@@ -88,12 +116,54 @@ function setupEventListeners() {
     document.querySelectorAll('.mode-option').forEach(option => {
         option.addEventListener('click', function() {
             const mode = this.dataset.mode;
-            const radio = document.querySelector(`input[name="mode"][value="${mode}"]`);
-            if (radio) {
-                radio.checked = true;
-                handleModeChange();
+            if (mode) {
+                const radio = document.querySelector(`input[name="mode"][value="${mode}"]`);
+                if (radio) {
+                    radio.checked = true;
+                    handleModeChange();
+                }
+            }
+            
+            const scoringMode = this.dataset.scoringMode;
+            if (scoringMode) {
+                const radio = document.querySelector(`input[name="scoringMode"][value="${scoringMode}"]`);
+                if (radio) {
+                    radio.checked = true;
+                    handleScoringModeChange();
+                }
             }
         });
+    });
+    
+    // 新增：打分模式切换
+    scoringModeRadios.forEach(radio => {
+        radio.addEventListener('change', handleScoringModeChange);
+    });
+    
+    // 新增：Prompt上传按钮
+    uploadGenPromptBtn.addEventListener('click', uploadGenerationPrompt);
+    clearGenPromptBtn.addEventListener('click', () => {
+        generationPromptText.value = '';
+        genPromptFileContent = null;
+        const fileInfo = document.getElementById('genPromptFileInfo');
+        if (fileInfo) fileInfo.style.display = 'none';
+        document.getElementById('genPromptFileInput').value = '';
+        showAlert('生成Prompt已清除', 'success');
+    });
+    
+    uploadScorePromptBtn.addEventListener('click', uploadScoringPrompt);
+    clearScorePromptBtn.addEventListener('click', () => {
+        scoringPromptText.value = '';
+        scorePromptFileContent = null;
+        const fileInfo = document.getElementById('scorePromptFileInfo');
+        if (fileInfo) fileInfo.style.display = 'none';
+        document.getElementById('scorePromptFileInput').value = '';
+        showAlert('打分Prompt已清除', 'success');
+    });
+    
+    // 新增：Json Diff按钮（预留）
+    jsonDiffBtn.addEventListener('click', () => {
+        showAlert('Json Diff功能开发中...', 'error');
     });
 }
 
@@ -106,11 +176,270 @@ async function loadAvailableModels() {
             if (data.success) {
                 availableModels = data.models;
                 populateModelSelects();
+                
+                // 同时加载已保存的prompts
+                await loadCurrentPrompts();
             }
         }
     } catch (error) {
         console.error('加载模型列表失败:', error);
         showAlert('加载模型列表失败', 'error');
+    }
+}
+
+// 加载当前已保存的prompts
+async function loadCurrentPrompts() {
+    try {
+        // 加载生成prompt
+        const genResponse = await fetch('/api/prompts/generation');
+        if (genResponse.ok) {
+            const genData = await genResponse.json();
+            if (genData.success && genData.custom) {
+                generationPromptText.value = genData.prompt;
+            }
+        }
+        
+        // 加载打分prompt
+        const scoreResponse = await fetch('/api/prompts/scoring');
+        if (scoreResponse.ok) {
+            const scoreData = await scoreResponse.json();
+            if (scoreData.success && scoreData.custom) {
+                scoringPromptText.value = scoreData.prompt;
+            }
+        }
+    } catch (error) {
+        console.error('加载prompts失败:', error);
+    }
+}
+
+// 初始化Prompt选项卡切换
+function initPromptTabs() {
+    document.querySelectorAll('.prompt-tab').forEach(tab => {
+        tab.addEventListener('click', function() {
+            const tabName = this.dataset.tab;
+            const promptType = this.dataset.prompt; // 'gen' 或 'score'
+            
+            // 找到所属的容器
+            const container = this.closest('.prompt-upload-area');
+            
+            // 切换active状态
+            container.querySelectorAll('.prompt-tab').forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+            
+            // 切换面板显示
+            container.querySelectorAll('.prompt-panel').forEach(panel => {
+                if (panel.dataset.prompt === promptType) {
+                    panel.style.display = panel.dataset.panel === tabName ? 'block' : 'none';
+                }
+            });
+            
+            // 更新模式
+            if (promptType === 'gen') {
+                genPromptMode = tabName;
+            } else if (promptType === 'score') {
+                scorePromptMode = tabName;
+            }
+        });
+    });
+}
+
+// 初始化生成Prompt文件上传
+function initGenPromptFileUpload() {
+    const dropZone = document.getElementById('genPromptDropZone');
+    const fileInput = document.getElementById('genPromptFileInput');
+    const fileInfo = document.getElementById('genPromptFileInfo');
+    const fileName = document.getElementById('genPromptFileName');
+    
+    if (!dropZone || !fileInput) return;
+    
+    // 点击区域触发文件选择
+    dropZone.addEventListener('click', (e) => {
+        if (e.target.tagName !== 'BUTTON' && e.target.tagName !== 'INPUT') {
+            fileInput.click();
+        }
+    });
+    
+    dropZone.querySelector('.btn-small').addEventListener('click', (e) => {
+        e.stopPropagation();
+        fileInput.click();
+    });
+    
+    // 拖拽事件
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('dragover');
+    });
+    
+    dropZone.addEventListener('dragleave', () => {
+        dropZone.classList.remove('dragover');
+    });
+    
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('dragover');
+        if (e.dataTransfer.files.length > 0) {
+            handleGenPromptFile(e.dataTransfer.files[0]);
+        }
+    });
+    
+    // 文件选择
+    fileInput.addEventListener('change', (e) => {
+        if (e.target.files.length > 0) {
+            handleGenPromptFile(e.target.files[0]);
+        }
+    });
+    
+    function handleGenPromptFile(file) {
+        if (!file) return;
+        
+        const isJson = file.name.endsWith('.json');
+        const isTxt = file.name.endsWith('.txt');
+        
+        if (!isJson && !isTxt) {
+            showAlert('请上传JSON或TXT格式文件', 'error');
+            return;
+        }
+        
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            genPromptFileContent = e.target.result;
+            fileName.textContent = file.name;
+            fileInfo.style.display = 'block';
+            showAlert('文件已加载：' + file.name, 'success');
+        };
+        reader.readAsText(file);
+    }
+}
+
+// 初始化打分Prompt文件上传
+function initScorePromptFileUpload() {
+    const dropZone = document.getElementById('scorePromptDropZone');
+    const fileInput = document.getElementById('scorePromptFileInput');
+    const fileInfo = document.getElementById('scorePromptFileInfo');
+    const fileName = document.getElementById('scorePromptFileName');
+    
+    if (!dropZone || !fileInput) return;
+    
+    // 点击区域触发文件选择
+    dropZone.addEventListener('click', (e) => {
+        if (e.target.tagName !== 'BUTTON' && e.target.tagName !== 'INPUT') {
+            fileInput.click();
+        }
+    });
+    
+    dropZone.querySelector('.btn-small').addEventListener('click', (e) => {
+        e.stopPropagation();
+        fileInput.click();
+    });
+    
+    // 拖拽事件
+    dropZone.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        dropZone.classList.add('dragover');
+    });
+    
+    dropZone.addEventListener('dragleave', () => {
+        dropZone.classList.remove('dragover');
+    });
+    
+    dropZone.addEventListener('drop', (e) => {
+        e.preventDefault();
+        dropZone.classList.remove('dragover');
+        if (e.dataTransfer.files.length > 0) {
+            handleScorePromptFile(e.dataTransfer.files[0]);
+        }
+    });
+    
+    // 文件选择
+    fileInput.addEventListener('change', (e) => {
+        if (e.target.files.length > 0) {
+            handleScorePromptFile(e.target.files[0]);
+        }
+    });
+    
+    function handleScorePromptFile(file) {
+        if (!file) return;
+        
+        const isJson = file.name.endsWith('.json');
+        const isTxt = file.name.endsWith('.txt');
+        
+        if (!isJson && !isTxt) {
+            showAlert('请上传JSON或TXT格式文件', 'error');
+            return;
+        }
+        
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            scorePromptFileContent = e.target.result;
+            fileName.textContent = file.name;
+            fileInfo.style.display = 'block';
+            showAlert('文件已加载：' + file.name, 'success');
+        };
+        reader.readAsText(file);
+    }
+}
+
+// 上传生成prompt（支持文本和文件两种方式）
+async function uploadGenerationPrompt() {
+    let promptContent = '';
+    
+    if (genPromptMode === 'text') {
+        promptContent = generationPromptText.value.trim();
+    } else if (genPromptMode === 'file') {
+        promptContent = genPromptFileContent;
+    }
+    
+    if (!promptContent) {
+        showAlert('请输入或上传prompt内容', 'error');
+        return;
+    }
+    
+    try {
+        const response = await fetch('/api/prompts/generation', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ prompt: promptContent })
+        });
+        
+        if (response.ok) {
+            showAlert('生成Prompt已保存', 'success');
+        } else {
+            showAlert('保存失败', 'error');
+        }
+    } catch (error) {
+        showAlert('保存失败: ' + error.message, 'error');
+    }
+}
+
+// 上传打分prompt（支持文本和文件两种方式）
+async function uploadScoringPrompt() {
+    let promptContent = '';
+    
+    if (scorePromptMode === 'text') {
+        promptContent = scoringPromptText.value.trim();
+    } else if (scorePromptMode === 'file') {
+        promptContent = scorePromptFileContent;
+    }
+    
+    if (!promptContent) {
+        showAlert('请输入或上传prompt内容', 'error');
+        return;
+    }
+    
+    try {
+        const response = await fetch('/api/prompts/scoring', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ prompt: promptContent })
+        });
+        
+        if (response.ok) {
+            showAlert('打分Prompt已保存', 'success');
+        } else {
+            showAlert('保存失败', 'error');
+        }
+    } catch (error) {
+        showAlert('保存失败: ' + error.message, 'error');
     }
 }
 
@@ -123,19 +452,21 @@ function populateModelSelects() {
     singleModel.innerHTML = modelOptions;
     userModel.innerHTML = modelOptions;
     agentModel.innerHTML = modelOptions;
+    scoringModel.innerHTML = modelOptions;
     
     // 设置默认值
     singleModel.value = 'qwen-max';
     userModel.value = 'qwen-max';
-    agentModel.value = 'gpt-4o-mini';
+    agentModel.value = 'turing-gpt';
+    scoringModel.value = 'turing-gpt';
 }
 
-// 处理模式切换
+// 处理生成模式切换
 function handleModeChange() {
     const selectedMode = document.querySelector('input[name="mode"]:checked').value;
     
     // 更新UI显示
-    document.querySelectorAll('.mode-option').forEach(option => {
+    document.querySelectorAll('.mode-option[data-mode]').forEach(option => {
         option.style.background = 'rgba(255, 255, 255, 0.03)';
         option.style.borderColor = 'var(--border)';
         option.style.boxShadow = 'none';
@@ -154,6 +485,25 @@ function handleModeChange() {
     } else {
         singleModelSelection.style.display = 'none';
         dualModelSelection.style.display = 'block';
+    }
+}
+
+// 处理打分模式切换
+function handleScoringModeChange() {
+    const selectedMode = document.querySelector('input[name="scoringMode"]:checked').value;
+    
+    // 更新UI显示
+    document.querySelectorAll('.mode-option[data-scoring-mode]').forEach(option => {
+        option.style.background = 'rgba(255, 255, 255, 0.03)';
+        option.style.borderColor = 'var(--border)';
+        option.style.boxShadow = 'none';
+    });
+    
+    const selectedOption = document.querySelector(`.mode-option[data-scoring-mode="${selectedMode}"]`);
+    if (selectedOption) {
+        selectedOption.style.background = 'rgba(255, 107, 157, 0.15)';
+        selectedOption.style.borderColor = 'var(--primary)';
+        selectedOption.style.boxShadow = '0 4px 16px rgba(255, 107, 157, 0.3)';
     }
 }
 
@@ -311,16 +661,29 @@ async function runExperiment() {
         
         // 获取选择的模式和模型
         const selectedMode = document.querySelector('input[name="mode"]:checked').value;
+        const selectedScoringMode = document.querySelector('input[name="scoringMode"]:checked').value;
+        
+        // 获取候选数
+        const candidatesCount = selectedMode === 'dual' 
+            ? parseInt(dualCandidates.value) 
+            : parseInt(singleCandidates.value);
+        
+        // 获取Top-K（空值表示不限制）
+        const topKValue = topK.value.trim() ? parseInt(topK.value) : null;
+        
         const requestBody = {
             version: experimentVersion,
             limit: uploadedQuestions.length,
-            candidates: 2,
-            score_rounds: 3,
+            candidates: candidatesCount,
+            score_rounds: parseInt(scoreRounds.value),
             top_k: uploadedQuestions.length,
-            mode: selectedMode
+            mode: selectedMode,
+            scoring_mode: selectedScoringMode,
+            scoring_model: scoringModel.value,
+            scoring_top_k: topKValue
         };
         
-        // 根据模式添加参数
+        // 根据生成模式添加参数
         if (selectedMode === 'dual') {
             // 双模型模式
             requestBody.user_model = userModel.value;
@@ -345,13 +708,16 @@ async function runExperiment() {
         startLogUpdates(experimentVersion);
         
         // 第三步：等待实验完成（轮询结果）
-        updateProgress(30, 'Qwen 正在生成候选对话...');
+        const modeText = selectedMode === 'dual' ? '双模型对话' : '单模型生成';
+        const scoringText = selectedScoringMode === 'overall' ? '整体评分' : '逐轮评分';
+        
+        updateProgress(30, `正在${modeText}候选对话...`);
         await sleep(3000);
         
-        updateProgress(50, 'GPT 正在进行多维度评分...');
+        updateProgress(50, `正在进行${scoringText}...`);
         await sleep(5000);
         
-        updateProgress(70, '正在选择最佳对话...');
+        updateProgress(70, '正在筛选最佳对话...');
         
         // 第四步：轮询检查实验状态（最多等待 10 分钟）
         updateProgress(80, '正在等待实验完成...');

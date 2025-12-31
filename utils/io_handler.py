@@ -82,7 +82,11 @@ def format_generation_output(candidates: List[Dict]) -> List[Dict]:
         
         # 格式化对话为字符串
         if isinstance(dialogue, list):
-            answer = '\n'.join([f"{msg['role']}: {msg['content']}" for msg in dialogue])
+            # 兼容 'role' 和 'speaker' 字段
+            answer = '\n'.join([
+                f"{msg.get('role') or msg.get('speaker', 'unknown')}: {msg['content']}" 
+                for msg in dialogue
+            ])
         else:
             answer = str(dialogue)
         
@@ -136,7 +140,11 @@ def format_final_output(scored_candidates: List[Dict]) -> List[Dict]:
         
         # 格式化对话
         if isinstance(dialogue, list):
-            answer = '\n'.join([f"{msg['role']}: {msg['content']}" for msg in dialogue])
+            # 兼容 'role' 和 'speaker' 字段
+            answer = '\n'.join([
+                f"{msg.get('role') or msg.get('speaker', 'unknown')}: {msg['content']}" 
+                for msg in dialogue
+            ])
         else:
             answer = str(dialogue)
         

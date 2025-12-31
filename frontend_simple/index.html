@@ -36,10 +36,10 @@
                 radial-gradient(circle at 80% 70%, rgba(74, 95, 217, 0.15) 0%, transparent 50%),
                 radial-gradient(circle at 50% 50%, rgba(254, 193, 99, 0.08) 0%, transparent 50%);
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 20px;
+            display: grid;
+            grid-template-columns: 80px 1fr;
+            padding: 0;
+            margin: 0;
             position: relative;
             overflow-x: hidden;
         }
@@ -67,16 +67,59 @@
             100% { transform: translate(50px, 50px); }
         }
 
-        .container {
+        /* 侧边栏 */
+        .sidebar {
             background: var(--bg-card);
-            border-radius: 32px;
-            box-shadow: 
-                0 0 0 1px var(--border),
-                0 20px 80px rgba(0, 0, 0, 0.5),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            padding: 60px;
-            max-width: 900px;
-            width: 100%;
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .sidebar-btn {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border-radius: 12px;
+            margin: 10px 0;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 11px;
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        .sidebar-btn:hover {
+            background: rgba(255, 107, 157, 0.1);
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .sidebar-btn .icon {
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+
+        /* 主容器 */
+        .main-content {
+            padding: 40px;
+            overflow-y: auto;
+            max-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
             position: relative;
             z-index: 1;
             animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
@@ -128,10 +171,10 @@
         }
 
         .step {
-            margin-bottom: 32px;
-            padding: 32px;
+            margin-bottom: 24px;
+            padding: 24px;
             background: rgba(255, 255, 255, 0.03);
-            border-radius: 20px;
+            border-radius: 16px;
             border: 1px solid var(--border);
             position: relative;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -166,10 +209,10 @@
         }
 
         .step-title {
-            font-size: 20px;
+            font-size: 16px;
             font-weight: 700;
             color: var(--text-primary);
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             display: flex;
             align-items: center;
             letter-spacing: -0.01em;
@@ -179,16 +222,16 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 44px;
-            height: 44px;
+            width: 36px;
+            height: 36px;
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white;
             border-radius: 50%;
-            margin-right: 16px;
-            font-size: 18px;
+            margin-right: 12px;
+            font-size: 16px;
             font-weight: 700;
             font-family: 'Space Mono', monospace;
-            box-shadow: 0 8px 20px rgba(255, 107, 157, 0.3);
+            box-shadow: 0 6px 16px rgba(255, 107, 157, 0.3);
             position: relative;
         }
 
@@ -789,6 +832,139 @@
             box-shadow: 0 0 0 3px rgba(255, 107, 157, 0.1);
         }
 
+        /* Prompt上传区域 */
+        .prompt-upload-area {
+            margin-top: 16px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px dashed var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .prompt-upload-area:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary);
+        }
+
+        .prompt-upload-area textarea {
+            width: 100%;
+            min-height: 80px;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-size: 13px;
+            font-family: 'Space Mono', monospace;
+            resize: vertical;
+            transition: all 0.3s;
+        }
+
+        .prompt-upload-area textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .prompt-upload-area textarea::placeholder {
+            color: var(--text-secondary);
+            opacity: 0.5;
+        }
+
+        .config-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .config-item label {
+            display: block;
+            color: var(--text-secondary);
+            font-size: 12px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .config-item input,
+        .config-item select {
+            width: 100%;
+        }
+
+        /* Prompt选项卡 */
+        .prompt-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .prompt-tab {
+            flex: 1;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .prompt-tab:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--primary);
+        }
+
+        .prompt-tab.active {
+            background: rgba(255, 107, 157, 0.15);
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .prompt-panel {
+            transition: all 0.3s;
+        }
+
+        /* 文件拖拽区 */
+        .file-drop-zone {
+            border: 2px dashed var(--border);
+            border-radius: 8px;
+            padding: 32px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .file-drop-zone:hover {
+            border-color: var(--primary);
+            background: rgba(255, 107, 157, 0.05);
+        }
+
+        .file-drop-zone.dragover {
+            border-color: var(--accent);
+            background: rgba(254, 193, 99, 0.1);
+            transform: scale(1.02);
+        }
+
+        .uploaded-file-info {
+            margin-top: 12px;
+            padding: 12px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 6px;
+            color: #10B981;
+            font-size: 13px;
+            animation: fadeIn 0.3s;
+        }
+
+        .uploaded-file-info strong {
+            color: #10B981;
+        
+
         /* 响应式设计 */
         @media (max-width: 768px) {
             #dualModelSelection > div:first-of-type {
@@ -835,6 +1011,16 @@
     </style>
 </head>
 <body>
+    <!-- 侧边栏 -->
+    <div class="sidebar">
+        <div class="sidebar-btn" id="jsonDiffBtn">
+            <div class="icon">📊</div>
+            <div>Json<br>Diff</div>
+        </div>
+    </div>
+
+    <!-- 主内容区 -->
+    <div class="main-content">
     <div class="container">
         <h1>🧠 对话生成系统</h1>
         <p class="subtitle">UPLOAD → GENERATE → DOWNLOAD</p>
@@ -845,89 +1031,241 @@
         <div class="step">
             <div class="step-title">
                 <span class="step-number">1</span>
-                上传问题集 (JSON 格式)
+                上传问题集与配置
             </div>
-            <div class="upload-area" id="uploadArea">
-                <div class="upload-icon">📁</div>
-                <div>点击选择文件或拖拽到此处</div>
-                <div>支持 .json 和 .txt 文件</div>
-                <input type="file" id="fileInput" accept=".json,.txt">
-            </div>
-            <div class="file-info" id="fileInfo">
-                <strong>已选择文件：</strong>
-                <div id="fileName"></div>
-                <div class="json-preview" id="jsonPreview"></div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                <!-- 左侧：问题集上传 -->
+                <div>
+                    <div style="color: var(--text-primary); font-weight: 600; margin-bottom: 12px; font-size: 14px;">📁 问题集文件</div>
+                    <div class="upload-area" id="uploadArea" style="padding: 32px;">
+                        <div class="upload-icon" style="font-size: 48px;">📁</div>
+                        <div>点击选择文件或拖拽到此处</div>
+                        <div>支持 .json 和 .txt 文件</div>
+                        <input type="file" id="fileInput" accept=".json,.txt">
+                    </div>
+                    <div class="file-info" id="fileInfo">
+                        <strong>已选择文件：</strong>
+                        <div id="fileName"></div>
+                        <div class="json-preview" id="jsonPreview"></div>
+                    </div>
+                </div>
+                
+                <!-- 右侧：生成Prompt -->
+                <div>
+                    <div style="color: var(--text-primary); font-weight: 600; margin-bottom: 12px; font-size: 14px;">📝 生成 Prompt (可选)</div>
+                    <div class="prompt-upload-area">
+                        <!-- 选项卡切换 -->
+                        <div class="prompt-tabs">
+                            <button class="prompt-tab active" data-tab="text" data-prompt="gen">✍️ 直接输入</button>
+                            <button class="prompt-tab" data-tab="file" data-prompt="gen">📁 上传文件</button>
+                        </div>
+                        
+                        <!-- 直接输入面板 -->
+                        <div class="prompt-panel" data-panel="text" data-prompt="gen" style="display: block;">
+                            <textarea id="generationPromptText" placeholder="在此输入自定义生成prompt，留空则使用默认prompt..." style="min-height: 150px;"></textarea>
+                        </div>
+                        
+                        <!-- 文件上传面板 -->
+                        <div class="prompt-panel" data-panel="file" data-prompt="gen" style="display: none;">
+                            <div class="file-drop-zone" id="genPromptDropZone">
+                                <div style="font-size: 32px; margin-bottom: 8px;">📁</div>
+                                <div style="margin-bottom: 8px;">拖拽文件到此处</div>
+                                <div style="color: var(--text-secondary); font-size: 12px; margin-bottom: 12px;">或</div>
+                                <button class="btn-small">选择文件</button>
+                                <input type="file" id="genPromptFileInput" accept=".json,.txt" hidden>
+                            </div>
+                            <div class="uploaded-file-info" id="genPromptFileInfo" style="display: none;">
+                                <strong>已选择：</strong> <span id="genPromptFileName"></span>
+                            </div>
+                        </div>
+                        
+                        <!-- 操作按钮 -->
+                        <div style="margin-top: 12px; display: flex; gap: 8px;">
+                            <button class="btn-small" id="uploadGenPromptBtn" style="flex: 1;">✓ 应用Prompt</button>
+                            <button class="btn-small" id="clearGenPromptBtn" style="flex: 1; background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.3);">✗ 清除</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- 步骤 2: 运行实验 -->
+        <!-- 步骤 2: 生成配置 -->
         <div class="step">
             <div class="step-title">
                 <span class="step-number">2</span>
-                运行实验
+                生成配置
             </div>
             
-            <!-- 新增：生成模式选择 -->
-            <div style="margin-bottom: 20px;">
+            <!-- 生成模式选择 -->
+            <div style="margin-bottom: 16px;">
                 <div style="color: var(--text-primary); font-weight: 600; margin-bottom: 12px; font-size: 14px;">📋 生成模式</div>
-                <div style="display: flex; gap: 16px;">
-                    <label style="flex: 1; cursor: pointer;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                    <label style="cursor: pointer;">
                         <input type="radio" name="mode" value="single" checked style="display: none;">
                         <div class="mode-option" data-mode="single">
-                            <div style="font-weight: 600; margin-bottom: 4px;">🤖 单模型生成</div>
-                            <div style="font-size: 12px; color: var(--text-secondary);">一个模型生成完整对话</div>
+                            <div style="font-weight: 600; margin-bottom: 4px; font-size: 14px;">🤖 单模型</div>
+                            <div style="font-size: 11px; color: var(--text-secondary);">一个模型生成完整对话</div>
                         </div>
                     </label>
-                    <label style="flex: 1; cursor: pointer;">
+                    <label style="cursor: pointer;">
                         <input type="radio" name="mode" value="dual" style="display: none;">
                         <div class="mode-option" data-mode="dual">
-                            <div style="font-weight: 600; margin-bottom: 4px;">🤝 双模型对话</div>
-                            <div style="font-size: 12px; color: var(--text-secondary);">两个模型互相对话</div>
+                            <div style="font-weight: 600; margin-bottom: 4px; font-size: 14px;">🤝 双模型</div>
+                            <div style="font-size: 11px; color: var(--text-secondary);">两个模型互相对话</div>
                         </div>
                     </label>
                 </div>
             </div>
             
-            <!-- 新增：模型选择 -->
-            <div id="modelSelection" style="margin-bottom: 20px;">
+            <!-- 模型选择 -->
+            <div id="modelSelection">
                 <!-- 单模型模式 -->
                 <div id="singleModelSelection" style="display: block;">
-                    <div style="color: var(--text-primary); font-weight: 600; margin-bottom: 12px; font-size: 14px;">🎯 选择模型</div>
-                    <select id="singleModel" class="model-select">
-                        <option value="">加载中...</option>
-                    </select>
-                    <div style="margin-top: 12px;">
-                        <label style="display: block; color: var(--text-secondary); font-size: 12px; margin-bottom: 8px;">🔄 生成对话轮数</label>
-                        <input type="number" id="singleDialogueRounds" class="rounds-input" value="5" min="1" max="10">
+                    <div class="config-grid">
+                        <div class="config-item">
+                            <label>🎯 模型</label>
+                            <select id="singleModel" class="model-select">
+                                <option value="">加载中...</option>
+                            </select>
+                        </div>
+                        <div class="config-item">
+                            <label>🔄 对话轮数</label>
+                            <input type="number" id="singleDialogueRounds" class="rounds-input" value="5" min="1" max="10">
+                        </div>
+                        <div class="config-item">
+                            <label>📊 每题候选数</label>
+                            <input type="number" id="singleCandidates" class="rounds-input" value="2" min="1" max="10">
+                        </div>
                     </div>
                 </div>
                 
                 <!-- 双模型模式 -->
                 <div id="dualModelSelection" style="display: none;">
-                    <div style="color: var(--text-primary); font-weight: 600; margin-bottom: 12px; font-size: 14px;">🎯 选择模型</div>
-                    <div style="display: grid; gap: 16px; grid-template-columns: 1fr 1fr;">
-                        <div>
-                            <label style="display: block; color: var(--text-secondary); font-size: 12px; margin-bottom: 8px;">👤 User 模型</label>
+                    <div class="config-grid">
+                        <div class="config-item">
+                            <label>👤 User 模型</label>
                             <select id="userModel" class="model-select">
                                 <option value="">加载中...</option>
                             </select>
                         </div>
-                        <div>
-                            <label style="display: block; color: var(--text-secondary); font-size: 12px; margin-bottom: 8px;">🤖 Agent 模型</label>
+                        <div class="config-item">
+                            <label>🤖 Agent 模型</label>
                             <select id="agentModel" class="model-select">
                                 <option value="">加载中...</option>
                             </select>
                         </div>
-                    </div>
-                    <div style="margin-top: 12px;">
-                        <label style="display: block; color: var(--text-secondary); font-size: 12px; margin-bottom: 8px;">🔄 对话轮数</label>
-                        <input type="number" id="dialogueRounds" class="rounds-input" value="3" min="1" max="10">
+                        <div class="config-item">
+                            <label>🔄 对话轮数</label>
+                            <input type="number" id="dialogueRounds" class="rounds-input" value="3" min="1" max="10">
+                        </div>
+                        <div class="config-item">
+                            <label>📊 每题候选数</label>
+                            <input type="number" id="dualCandidates" class="rounds-input" value="2" min="1" max="10">
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
+        
+        <!-- 步骤 3: 打分配置 -->
+        <div class="step">
+            <div class="step-title">
+                <span class="step-number">3</span>
+                打分配置
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px;">
+                <!-- 左侧：打分模式和参数 -->
+                <div>
+                    <!-- 打分模式选择 -->
+                    <div style="margin-bottom: 16px;">
+                        <div style="color: var(--text-primary); font-weight: 600; margin-bottom: 12px; font-size: 14px;">📊 打分模式</div>
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                            <label style="cursor: pointer;">
+                                <input type="radio" name="scoringMode" value="per_turn" checked style="display: none;">
+                                <div class="mode-option" data-scoring-mode="per_turn">
+                                    <div style="font-weight: 600; margin-bottom: 4px; font-size: 14px;">📝 逐轮打分</div>
+                                    <div style="font-size: 11px; color: var(--text-secondary);">对每轮对话独立评分</div>
+                                </div>
+                            </label>
+                            <label style="cursor: pointer;">
+                                <input type="radio" name="scoringMode" value="overall" style="display: none;">
+                                <div class="mode-option" data-scoring-mode="overall">
+                                    <div style="font-weight: 600; margin-bottom: 4px; font-size: 14px;">🎯 整体打分</div>
+                                    <div style="font-size: 11px; color: var(--text-secondary);">对整个对话综合评分</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- 打分参数 -->
+                    <div class="config-grid">
+                        <div class="config-item">
+                            <label>🎯 打分模型</label>
+                            <select id="scoringModel" class="model-select">
+                                <option value="">加载中...</option>
+                            </select>
+                        </div>
+                        <div class="config-item">
+                            <label>🔄 打分轮次</label>
+                            <input type="number" id="scoreRounds" class="rounds-input" value="3" min="1" max="10">
+                        </div>
+                        <div class="config-item">
+                            <label>🏆 保留 Top-K</label>
+                            <input type="number" id="topK" class="rounds-input" value="" placeholder="全部" min="1">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 右侧：打分Prompt -->
+                <div>
+                    <div style="color: var(--text-primary); font-weight: 600; margin-bottom: 12px; font-size: 14px;">📝 打分 Prompt (可选)</div>
+                    <div class="prompt-upload-area">
+                        <!-- 选项卡切换 -->
+                        <div class="prompt-tabs">
+                            <button class="prompt-tab active" data-tab="text" data-prompt="score">✍️ 直接输入</button>
+                            <button class="prompt-tab" data-tab="file" data-prompt="score">📁 上传文件</button>
+                        </div>
+                        
+                        <!-- 直接输入面板 -->
+                        <div class="prompt-panel" data-panel="text" data-prompt="score" style="display: block;">
+                            <textarea id="scoringPromptText" placeholder="在此输入自定义打分prompt，留空则使用默认prompt..." style="min-height: 120px;"></textarea>
+                        </div>
+                        
+                        <!-- 文件上传面板 -->
+                        <div class="prompt-panel" data-panel="file" data-prompt="score" style="display: none;">
+                            <div class="file-drop-zone" id="scorePromptDropZone">
+                                <div style="font-size: 32px; margin-bottom: 8px;">📁</div>
+                                <div style="margin-bottom: 8px;">拖拽文件到此处</div>
+                                <div style="color: var(--text-secondary); font-size: 12px; margin-bottom: 12px;">或</div>
+                                <button class="btn-small">选择文件</button>
+                                <input type="file" id="scorePromptFileInput" accept=".json,.txt" hidden>
+                            </div>
+                            <div class="uploaded-file-info" id="scorePromptFileInfo" style="display: none;">
+                                <strong>已选择：</strong> <span id="scorePromptFileName"></span>
+                            </div>
+                        </div>
+                        
+                        <!-- 操作按钮 -->
+                        <div style="margin-top: 12px; display: flex; gap: 8px;">
+                            <button class="btn-small" id="uploadScorePromptBtn" style="flex: 1;">✓ 应用</button>
+                            <button class="btn-small" id="clearScorePromptBtn" style="flex: 1; background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.3);">✗ 清除</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 步骤 4: 运行实验 -->
+        <div class="step">
+            <div class="step-title">
+                <span class="step-number">4</span>
+                运行实验
+            </div>
             
             <button class="btn btn-primary" id="runBtn" disabled>
-                <span>🚀 开始生成对话</span>
+                <span>🚀 开始实验</span>
             </button>
             <div class="progress-container" id="progressContainer">
                 <div class="progress-bar">
@@ -944,10 +1282,10 @@
             </div>
         </div>
 
-        <!-- 步骤 3: 下载结果 -->
+        <!-- 步骤 5: 下载结果 -->
         <div class="step">
             <div class="step-title">
-                <span class="step-number">3</span>
+                <span class="step-number">5</span>
                 下载结果
             </div>
             <div class="result-container" id="resultContainer">
@@ -970,6 +1308,7 @@
                 <span>💾 下载 QA 结果集</span>
             </button>
         </div>
+    </div>
     </div>
 
     <script src="app.js"></script>

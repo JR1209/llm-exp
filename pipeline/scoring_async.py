@@ -55,9 +55,22 @@ async def score_one_round_async(candidate, round_idx):
     return None
 
 
-async def step2_gpt_scoring_async(candidates: List[Dict], num_rounds: int) -> List[Dict]:
+async def step2_gpt_scoring_async(
+    candidates: List[Dict], 
+    num_rounds: int,
+    scoring_mode: str = 'per_turn',
+    scoring_prompt: str = None,
+    top_k: int = None
+) -> List[Dict]:
     """
     Step 2: 使用GPT异步评分
+    
+    Args:
+        candidates: 候选列表
+        num_rounds: 评分轮次
+        scoring_mode: 'per_turn' 或 'overall' (保留参数，实际由外部路由)
+        scoring_prompt: 自定义评分prompt
+        top_k: 每个问题保留前K个（None表示全部保留）
     """
     logger.info("\n" + "="*80)
     logger.info("Step 2: GPT Multi-round Scoring (Async)")
@@ -102,4 +115,24 @@ async def step2_gpt_scoring_async(candidates: List[Dict], num_rounds: int) -> Li
     
     logger.info("-"*80)
     logger.info(f"✅ Step 2 完成: {len(results)} 个候选评分完成\n")
+    
+    # Top-K筛选（如果指定）
+    if top_k is not None and top_k > 0:
+        # 按问题分组
+        by_question = {}
+        for item in results:
+            qid = item['question_id']
+            if qid not in by_question:
+                by_question[qid] = []
+            by_question[qid].append(item)
+        
+        # 每个问题保留Top-K
+        filtered_results = []
+        for qid, items in by_question.items():
+            sorted_items = sorted(items, key=lambda x: x['scores']['Total'], reverse=True)
+            filtered_results.extend(sorted_items[:top_k])
+        
+        logger.info(f"📊 Top-K筛选: {len(results)} → {len(filtered_results)}")
+        return filtered_results
+    
     return results

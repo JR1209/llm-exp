@@ -25,6 +25,7 @@ from utils.io_handler import (
 from pipeline.generation_async import step1_qwen_generation_async
 from pipeline.generation_dual_async import step1_dual_generation_async
 from pipeline.scoring_async import step2_gpt_scoring_async
+from pipeline.scoring_overall_async import step2_overall_scoring_async
 from pipeline.selection import step3_selection
 from sqlite_handler import SQLiteHandler, load_prompts_from_file, load_code_snapshots
 
@@ -261,6 +262,13 @@ async def main_async(args):
             logger.info("🔄 Step 1: 生成候选答案")
             logger.info("="*80)
             
+            # 加载自定义prompt（如果提供）
+            generation_prompt = None
+            if args.generation_prompt_file and Path(args.generation_prompt_file).exists():
+                with open(args.generation_prompt_file, 'r', encoding='utf-8') as f:
+                    generation_prompt = f.read()
+                logger.info(f"📝 使用自定义生成Prompt: {args.generation_prompt_file}")
+            
             if args.mode == 'dual':
                 # 双模型对话模式
                 logger.info(f"模式: 双模型对话 | User: {args.user_model} | Agent: {args.agent_model} | 轮数: {args.dialogue_rounds}")
@@ -295,11 +303,37 @@ async def main_async(args):
             
             mlflow.log_metric("num_candidates_generated", len(candidates))
             
-            # Step 2: GPT评分 (异步)
+            # Step 2: 评分 (根据模式选择)
             logger.info("\n" + "="*80)
             logger.info("🔄 Step 2: 评分")
             logger.info("="*80)
-            scored_candidates = await step2_gpt_scoring_async(candidates, args.score_rounds)
+            
+            # 加载自定义prompt（如果提供）
+            scoring_prompt = None
+            if args.scoring_prompt_file and Path(args.scoring_prompt_file).exists():
+                with open(args.scoring_prompt_file, 'r', encoding='utf-8') as f:
+                    scoring_prompt = f.read()
+                logger.info(f"📝 使用自定义打分Prompt: {args.scoring_prompt_file}")
+            
+            if args.scoring_mode == 'overall':
+                # 整体打分模式
+                logger.info(f"模式: 整体打分 | 模型: {args.scoring_model} | Top-K: {args.scoring_top_k or '全部'}")
+                scored_candidates = await step2_overall_scoring_async(
+                    candidates,
+                    scoring_prompt=scoring_prompt,
+                    score_rounds=args.score_rounds,
+                    top_k=args.scoring_top_k
+                )
+            else:
+                # 逐轮打分模式
+                logger.info(f"模式: 逐轮打分 | 模型: {args.scoring_model} | Top-K: {args.scoring_top_k or '全部'}")
+                scored_candidates = await step2_gpt_scoring_async(
+                    candidates,
+                    args.score_rounds,
+                    scoring_mode=args.scoring_mode,
+                    scoring_prompt=scoring_prompt,
+                    top_k=args.scoring_top_k
+                )
             
             # 保存Step2结果到文件
             raw_scores_file = os.path.join(output_dir, f"gpt_scores_raw_{args.version}.json")
@@ -453,6 +487,13 @@ def main():
     parser.add_argument('--user-model', type=str, default='qwen-max', help='双模型模式下的User模型')
     parser.add_argument('--agent-model', type=str, default='gpt-4o-mini', help='双模型模式下的Agent模型')
     parser.add_argument('--dialogue-rounds', type=int, default=3, help='双模型对话轮数')
+    
+    # 新增：打分模式参数
+    parser.add_argument('--scoring-mode', type=str, default='per_turn', choices=['per_turn', 'overall'], help='打分模式: per_turn=逐轮打分, overall=整体打分')
+    parser.add_argument('--scoring-model', type=str, default='gpt-4o-mini', help='打分使用的模型')
+    parser.add_argument('--scoring-top-k', type=int, default=None, help='每个问题保留前K个结果（None=全部保留）')
+    parser.add_argument('--generation-prompt-file', type=str, default=None, help='自定义生成prompt文件路径')
+    parser.add_argument('--scoring-prompt-file', type=str, default=None, help='自定义打分prompt文件路径')
     
     args = parser.parse_args()
     

@@ -84,13 +84,19 @@ async def call_model_async(model: str, prompt: str, max_retries: int = 3) -> str
                 max_tokens=500
             )
             
-            content = response.choices[0].message.content.strip()
-            return content
+            # 检查响应是否有效
+            if response and response.choices and len(response.choices) > 0:
+                message = response.choices[0].message
+                if message and message.content:
+                    return message.content.strip()
+            
+            logger.warning(f"API返回空响应 [{model}] (尝试 {attempt+1}/{max_retries})")
                 
         except Exception as e:
             logger.warning(f"API调用异常 [{model}] (尝试 {attempt+1}/{max_retries}): {e}")
-            if attempt < max_retries - 1:
-                await asyncio.sleep(2)
+        
+        if attempt < max_retries - 1:
+            await asyncio.sleep(2)
     
     logger.error(f"API调用最终失败 [{model}]")
     return None

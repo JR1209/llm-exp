@@ -16,20 +16,87 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).parent.absolute()
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from config_async import AVAILABLE_MODELS, DIALOGUE_MODES
+from config_async import AVAILABLE_MODELS, DIALOGUE_MODES, SCORING_MODES
 
 app = Flask(__name__)
 CORS(app)
 
 @app.route('/api/models', methods=['GET'])
 def get_available_models():
-    """获取可用模型列表"""
+    """获取可用模型列表和模式"""
     try:
         return jsonify({
             'success': True,
             'models': AVAILABLE_MODELS,
-            'modes': DIALOGUE_MODES
+            'dialogue_modes': DIALOGUE_MODES,
+            'scoring_modes': SCORING_MODES
         })
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@app.route('/api/prompts/generation', methods=['POST'])
+def upload_generation_prompt():
+    """上传生成阶段的自定义prompt"""
+    try:
+        data = request.json
+        prompt_text = data.get('prompt', '').strip()
+        
+        if not prompt_text:
+            return jsonify({'success': False, 'error': 'Prompt不能为空'}), 400
+        
+        # 保存到临时文件
+        prompt_file = Path('temp_generation_prompt.txt')
+        with open(prompt_file, 'w', encoding='utf-8') as f:
+            f.write(prompt_text)
+        
+        return jsonify({'success': True, 'message': '生成Prompt已保存'})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@app.route('/api/prompts/scoring', methods=['POST'])
+def upload_scoring_prompt():
+    """上传打分阶段的自定义prompt"""
+    try:
+        data = request.json
+        prompt_text = data.get('prompt', '').strip()
+        
+        if not prompt_text:
+            return jsonify({'success': False, 'error': 'Prompt不能为空'}), 400
+        
+        # 保存到临时文件
+        prompt_file = Path('temp_scoring_prompt.txt')
+        with open(prompt_file, 'w', encoding='utf-8') as f:
+            f.write(prompt_text)
+        
+        return jsonify({'success': True, 'message': '打分Prompt已保存'})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@app.route('/api/prompts/generation', methods=['GET'])
+def get_generation_prompt():
+    """获取当前生成prompt"""
+    try:
+        prompt_file = Path('temp_generation_prompt.txt')
+        if prompt_file.exists():
+            with open(prompt_file, 'r', encoding='utf-8') as f:
+                prompt_text = f.read()
+            return jsonify({'success': True, 'prompt': prompt_text, 'custom': True})
+        else:
+            return jsonify({'success': True, 'prompt': '', 'custom': False})
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
+
+@app.route('/api/prompts/scoring', methods=['GET'])
+def get_scoring_prompt():
+    """获取当前打分prompt"""
+    try:
+        prompt_file = Path('temp_scoring_prompt.txt')
+        if prompt_file.exists():
+            with open(prompt_file, 'r', encoding='utf-8') as f:
+                prompt_text = f.read()
+            return jsonify({'success': True, 'prompt': prompt_text, 'custom': True})
+        else:
+            return jsonify({'success': True, 'prompt': '', 'custom': False})
     except Exception as e:
         return jsonify({'success': False, 'error': str(e)}), 500
 
@@ -99,6 +166,11 @@ def run_experiment():
         dialogue_rounds = data.get('dialogue_rounds', 3)  # 双模型对话轮数
         num_turns = data.get('num_turns', 5)  # 单模型生成轮数
         
+        # 新增：打分配置
+        scoring_mode = data.get('scoring_mode', 'per_turn')  # 'per_turn' 或 'overall'
+        scoring_top_k = data.get('scoring_top_k', None)  # Top-K筛选
+        scoring_model = data.get('scoring_model', 'gpt-4o-mini')  # 打分使用的模型
+        
         # 确保输出目录存在
         output_dir = Path(f'Outputs/{version}')
         output_dir.mkdir(parents=True, exist_ok=True)
@@ -110,10 +182,16 @@ def run_experiment():
             '--score-rounds', str(score_rounds),
             '--version', version,
             '--top-k', str(top_k),
-            '--mode', mode
+            '--mode', mode,
+            '--scoring-mode', scoring_mode,
+            '--scoring-model', scoring_model
         ]
         
-        # 根据模式添加参数
+        # 添加Top-K参数（如果指定）
+        if scoring_top_k is not None:
+            cmd.extend(['--scoring-top-k', str(scoring_top_k)])
+        
+        # 根据对话模式添加参数
         if mode == 'dual':
             # 双模型模式
             cmd.extend([
@@ -126,6 +204,16 @@ def run_experiment():
             cmd.extend([
                 '--num-turns', str(num_turns)
             ])
+        
+        # 添加自定义prompt路径（如果存在）
+        gen_prompt_file = Path('temp_generation_prompt.txt')
+        score_prompt_file = Path('temp_scoring_prompt.txt')
+        
+        if gen_prompt_file.exists():
+            cmd.extend(['--generation-prompt-file', str(gen_prompt_file)])
+        
+        if score_prompt_file.exists():
+            cmd.extend(['--scoring-prompt-file', str(score_prompt_file)])
         
         # 记录日志
         log_file = output_dir / 'experiment.log'

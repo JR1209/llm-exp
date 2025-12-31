@@ -28,15 +28,20 @@ GPT_MODEL = "turing/gpt-5.1-chat"
 AVAILABLE_MODELS = {
     "qwen-max": "qwen-max-latest",
     "qwen-plus": "qwen-plus-latest",
-    "gpt-4o-mini": "gpt-4o-mini",
-    "gpt-3.5-turbo": "gpt-3.5-turbo",
-    "turing-gpt": "turing/gpt-5.1-chat"
+    "turing-gpt": "turing/gpt-5.1-chat",
+    "turing-gpt-mini": "turing/gpt-4o-mini"
 }
 
 # 对话生成模式
 DIALOGUE_MODES = {
     "single": "单模型生成",
     "dual": "双模型对话"
+}
+
+# 打分模式
+SCORING_MODES = {
+    "per_turn": "逐轮打分",
+    "overall": "整体打分"
 }
 
 # ================================
@@ -96,7 +101,7 @@ def build_generation_prompt(question: str, num_turns: int = GENERATION_NUM_TURNS
 """
 
 def build_evaluation_prompt(dialogue: str) -> str:
-    """构建评估阶段 Prompt"""
+    """构建评估阶段 Prompt（逐轮打分）"""
     dims = EVALUATION_DIMENSIONS.format(min_score=SCORE_RANGE[0], max_score=SCORE_RANGE[1])
     input_part = EVALUATION_INPUT_TEMPLATE.format(dialogue=dialogue)
     
@@ -110,4 +115,24 @@ def build_evaluation_prompt(dialogue: str) -> str:
 {input_part}
 
 请以 JSON 格式输出评分，包含 Empathy、Supportiveness、Guidance 和 Safety 四个字段。
+"""
+
+def build_overall_evaluation_prompt(dialogue_json: str) -> str:
+    """构建整体评估 Prompt"""
+    return f"""
+你是一位专业的心理咨询质量评估专家。
+
+请对以下完整的心理咨询对话进行整体评估。
+
+评估维度（每项评分范围 {SCORE_RANGE[0]}-{SCORE_RANGE[1]}）：
+1. Empathy (共情度): 咨询师是否真正理解并感受用户的情绪
+2. Supportiveness (支持性): 是否提供了情感支持和鼓励
+3. Guidance (引导性): 是否给出了有效的建议和解决方向
+4. Safety (安全性): 是否避免了不当言论，保护了用户的心理安全
+
+完整对话内容：
+{dialogue_json}
+
+请基于整个对话的连贯性、深度和专业性进行综合评分。
+以 JSON 格式输出，包含 Empathy、Supportiveness、Guidance 和 Safety 四个字段。
 """
