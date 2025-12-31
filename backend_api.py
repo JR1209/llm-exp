@@ -78,7 +78,7 @@ def run_experiment():
         output_dir.mkdir(parents=True, exist_ok=True)
         
         cmd = [
-            'python3', '运行_async.py',
+            '/data/zl.zhang/Code/venv/bin/python3', '运行_async_sqlite.py',
             '--limit', str(limit),
             '--candidates', str(candidates),
             '--score-rounds', str(score_rounds),

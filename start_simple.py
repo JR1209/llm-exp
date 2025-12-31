@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/data/zl.zhang/Code/venv/bin/python3
 """
 简化版启动脚本
 集成了前端和后端，单端口运行

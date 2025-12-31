@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/data/zl.zhang/Code/venv/bin/python3
 """
 实验主脚本 - 异步版本 + MLflow + SQLite
 """
@@ -61,9 +61,9 @@ async def main_async(args):
             output_dir = str(output_dir)
             
             # 设置日志（保存到 logs 目录）
+            logs_dir = PROJECT_ROOT / 'logs'
+            logs_dir.mkdir(exist_ok=True)
             if args.log is None:
-                logs_dir = PROJECT_ROOT / 'logs'
-                logs_dir.mkdir(exist_ok=True)
                 args.log = str(logs_dir / f'experiment_{args.version}.log')
             logger = setup_logger(args.log)
             
