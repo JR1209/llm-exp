@@ -9,10 +9,29 @@ from flask_cors import CORS
 import subprocess
 import json
 import os
+import sys
 from pathlib import Path
+
+# 添加项目根目录到路径
+PROJECT_ROOT = Path(__file__).parent.absolute()
+sys.path.insert(0, str(PROJECT_ROOT))
+
+from config_async import AVAILABLE_MODELS, DIALOGUE_MODES
 
 app = Flask(__name__)
 CORS(app)
+
+@app.route('/api/models', methods=['GET'])
+def get_available_models():
+    """获取可用模型列表"""
+    try:
+        return jsonify({
+            'success': True,
+            'models': AVAILABLE_MODELS,
+            'modes': DIALOGUE_MODES
+        })
+    except Exception as e:
+        return jsonify({'success': False, 'error': str(e)}), 500
 
 @app.route('/api/questions', methods=['GET'])
 def get_questions():
@@ -73,6 +92,13 @@ def run_experiment():
         version = data.get('version', 'v1')
         top_k = data.get('top_k', 5)
         
+        # 新增：对话模式和模型选择
+        mode = data.get('mode', 'single')  # 'single' 或 'dual'
+        user_model = data.get('user_model', 'qwen-max')  # 双模型模式的User模型
+        agent_model = data.get('agent_model', 'gpt-4o-mini')  # 双模型模式的Agent模型
+        dialogue_rounds = data.get('dialogue_rounds', 3)  # 双模型对话轮数
+        num_turns = data.get('num_turns', 5)  # 单模型生成轮数
+        
         # 确保输出目录存在
         output_dir = Path(f'Outputs/{version}')
         output_dir.mkdir(parents=True, exist_ok=True)
@@ -83,8 +109,23 @@ def run_experiment():
             '--candidates', str(candidates),
             '--score-rounds', str(score_rounds),
             '--version', version,
-            '--top-k', str(top_k)
+            '--top-k', str(top_k),
+            '--mode', mode
         ]
+        
+        # 根据模式添加参数
+        if mode == 'dual':
+            # 双模型模式
+            cmd.extend([
+                '--user-model', user_model,
+                '--agent-model', agent_model,
+                '--dialogue-rounds', str(dialogue_rounds)
+            ])
+        else:
+            # 单模型模式：添加生成轮数
+            cmd.extend([
+                '--num-turns', str(num_turns)
+            ])
         
         # 记录日志
         log_file = output_dir / 'experiment.log'

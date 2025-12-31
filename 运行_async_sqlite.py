@@ -23,6 +23,7 @@ from utils.io_handler import (
     format_final_output
 )
 from pipeline.generation_async import step1_qwen_generation_async
+from pipeline.generation_dual_async import step1_dual_generation_async
 from pipeline.scoring_async import step2_gpt_scoring_async
 from pipeline.selection import step3_selection
 from sqlite_handler import SQLiteHandler, load_prompts_from_file, load_code_snapshots
@@ -255,11 +256,25 @@ async def main_async(args):
             
             logger.info("  └─ 快照记录完成！\n")
             
-            # Step 1: Qwen生成 (异步)
+            # Step 1: 生成候选答案 (根据模式选择)
             logger.info("\n" + "="*80)
             logger.info("🔄 Step 1: 生成候选答案")
             logger.info("="*80)
-            candidates = await step1_qwen_generation_async(questions, args.candidates)
+            
+            if args.mode == 'dual':
+                # 双模型对话模式
+                logger.info(f"模式: 双模型对话 | User: {args.user_model} | Agent: {args.agent_model} | 轮数: {args.dialogue_rounds}")
+                candidates = await step1_dual_generation_async(
+                    questions, 
+                    args.user_model,
+                    args.agent_model,
+                    args.candidates,
+                    args.dialogue_rounds
+                )
+            else:
+                # 单模型生成模式
+                logger.info(f"模式: 单模型生成 | 对话轮数: {args.num_turns}")
+                candidates = await step1_qwen_generation_async(questions, args.candidates, args.num_turns)
             
             # 保存Step1结果到文件
             raw_file = os.path.join(output_dir, f"qwen_candidates_raw_{args.version}.json")
@@ -431,6 +446,13 @@ def main():
     parser.add_argument('--input', type=str, default=str(PROJECT_ROOT / 'inputs' / 'questions.txt'), help='输入文件')
     parser.add_argument('--log', type=str, default=None, help='日志文件路径')
     parser.add_argument('--db-path', type=str, default='experiments.db', help='SQLite 数据库文件路径')
+    
+    # 新增：对话模式参数
+    parser.add_argument('--mode', type=str, default='single', choices=['single', 'dual'], help='对话生成模式: single=单模型, dual=双模型')
+    parser.add_argument('--num-turns', type=int, default=5, help='单模型生成对话轮数')
+    parser.add_argument('--user-model', type=str, default='qwen-max', help='双模型模式下的User模型')
+    parser.add_argument('--agent-model', type=str, default='gpt-4o-mini', help='双模型模式下的Agent模型')
+    parser.add_argument('--dialogue-rounds', type=int, default=3, help='双模型对话轮数')
     
     args = parser.parse_args()
     

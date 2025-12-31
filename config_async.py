@@ -24,6 +24,21 @@ client = AsyncOpenAI(
 QWEN_MODEL = "qwen-max-latest"
 GPT_MODEL = "turing/gpt-5.1-chat"
 
+# 可用模型列表（用于前端选择）
+AVAILABLE_MODELS = {
+    "qwen-max": "qwen-max-latest",
+    "qwen-plus": "qwen-plus-latest",
+    "gpt-4o-mini": "gpt-4o-mini",
+    "gpt-3.5-turbo": "gpt-3.5-turbo",
+    "turing-gpt": "turing/gpt-5.1-chat"
+}
+
+# 对话生成模式
+DIALOGUE_MODES = {
+    "single": "单模型生成",
+    "dual": "双模型对话"
+}
+
 # ================================
 # 生成阶段配置
 # ================================

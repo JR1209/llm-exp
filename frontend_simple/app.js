@@ -21,12 +21,26 @@ const logViewer = document.getElementById('logViewer');
 const logContent = document.getElementById('logContent');
 const refreshLogBtn = document.getElementById('refreshLogBtn');
 
+// 新增：模式和模型选择元素
+const modeRadios = document.querySelectorAll('input[name="mode"]');
+const singleModelSelection = document.getElementById('singleModelSelection');
+const dualModelSelection = document.getElementById('dualModelSelection');
+const singleModel = document.getElementById('singleModel');
+const singleDialogueRounds = document.getElementById('singleDialogueRounds');
+const userModel = document.getElementById('userModel');
+const agentModel = document.getElementById('agentModel');
+const dialogueRounds = document.getElementById('dialogueRounds');
+
+// 可用模型列表
+let availableModels = {};
+
 // 日志更新定时器
 let logUpdateInterval = null;
 
 // 初始化
 document.addEventListener('DOMContentLoaded', () => {
     setupEventListeners();
+    loadAvailableModels();
 });
 
 // 设置事件监听
@@ -64,6 +78,83 @@ function setupEventListeners() {
     
     // 刷新日志按钮
     refreshLogBtn.addEventListener('click', () => fetchLog(experimentVersion));
+    
+    // 新增：模式切换
+    modeRadios.forEach(radio => {
+        radio.addEventListener('change', handleModeChange);
+    });
+    
+    // 新增：模式选项点击
+    document.querySelectorAll('.mode-option').forEach(option => {
+        option.addEventListener('click', function() {
+            const mode = this.dataset.mode;
+            const radio = document.querySelector(`input[name="mode"][value="${mode}"]`);
+            if (radio) {
+                radio.checked = true;
+                handleModeChange();
+            }
+        });
+    });
+}
+
+// 加载可用模型列表
+async function loadAvailableModels() {
+    try {
+        const response = await fetch('/api/models');
+        if (response.ok) {
+            const data = await response.json();
+            if (data.success) {
+                availableModels = data.models;
+                populateModelSelects();
+            }
+        }
+    } catch (error) {
+        console.error('加载模型列表失败:', error);
+        showAlert('加载模型列表失败', 'error');
+    }
+}
+
+// 填充模型选择下拉框
+function populateModelSelects() {
+    const modelOptions = Object.entries(availableModels)
+        .map(([key, value]) => `<option value="${key}">${key} (${value})</option>`)
+        .join('');
+    
+    singleModel.innerHTML = modelOptions;
+    userModel.innerHTML = modelOptions;
+    agentModel.innerHTML = modelOptions;
+    
+    // 设置默认值
+    singleModel.value = 'qwen-max';
+    userModel.value = 'qwen-max';
+    agentModel.value = 'gpt-4o-mini';
+}
+
+// 处理模式切换
+function handleModeChange() {
+    const selectedMode = document.querySelector('input[name="mode"]:checked').value;
+    
+    // 更新UI显示
+    document.querySelectorAll('.mode-option').forEach(option => {
+        option.style.background = 'rgba(255, 255, 255, 0.03)';
+        option.style.borderColor = 'var(--border)';
+        option.style.boxShadow = 'none';
+    });
+    
+    const selectedOption = document.querySelector(`.mode-option[data-mode="${selectedMode}"]`);
+    if (selectedOption) {
+        selectedOption.style.background = 'rgba(255, 107, 157, 0.15)';
+        selectedOption.style.borderColor = 'var(--primary)';
+        selectedOption.style.boxShadow = '0 4px 16px rgba(255, 107, 157, 0.3)';
+    }
+    
+    if (selectedMode === 'single') {
+        singleModelSelection.style.display = 'block';
+        dualModelSelection.style.display = 'none';
+    } else {
+        singleModelSelection.style.display = 'none';
+        dualModelSelection.style.display = 'block';
+    }
 }
 
 // 获取实验日志
@@ -217,16 +308,33 @@ async function runExperiment() {
         // 第二步：启动实验
         updateProgress(20, '正在启动实验...');
         experimentVersion = 'v' + Date.now();
+        
+        // 获取选择的模式和模型
+        const selectedMode = document.querySelector('input[name="mode"]:checked').value;
+        const requestBody = {
+            version: experimentVersion,
+            limit: uploadedQuestions.length,
+            candidates: 2,
+            score_rounds: 3,
+            top_k: uploadedQuestions.length,
+            mode: selectedMode
+        };
+        
+        // 根据模式添加参数
+        if (selectedMode === 'dual') {
+            // 双模型模式
+            requestBody.user_model = userModel.value;
+            requestBody.agent_model = agentModel.value;
+            requestBody.dialogue_rounds = parseInt(dialogueRounds.value);
+        } else {
+            // 单模型模式：添加生成轮数
+            requestBody.num_turns = parseInt(singleDialogueRounds.value);
+        }
+        
         const expResult = await fetch('/api/experiments/run', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                version: experimentVersion,
-                limit: uploadedQuestions.length,
-                candidates: 2,
-                score_rounds: 3,
-                top_k: uploadedQuestions.length
-            })
+            body: JSON.stringify(requestBody)
         });
         
         if (!expResult.ok) throw new Error('启动实验失败');

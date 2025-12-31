@@ -42,8 +42,8 @@ async def call_api_structured_async(model: str, prompt: str, schema_class, max_r
 
 async def generate_one_async(task):
     """异步生成单个候选对话"""
-    idx, question, cand_id = task
-    prompt = build_generation_prompt(question)
+    idx, question, cand_id, num_turns = task
+    prompt = build_generation_prompt(question, num_turns)
     
     result = await call_api_structured_async(QWEN_MODEL, prompt, GenerationOutput)
     
@@ -58,14 +58,19 @@ async def generate_one_async(task):
         return idx, question, cand_id, None
 
 
-async def step1_qwen_generation_async(questions: List[str], num_candidates: int) -> List[Dict]:
+async def step1_qwen_generation_async(questions: List[str], num_candidates: int, num_turns: int = 5) -> List[Dict]:
     """
     Step 1: 使用Qwen异步生成候选对话
+    
+    Args:
+        questions: 问题列表
+        num_candidates: 每个问题生成的候选数
+        num_turns: 生成的对话轮数
     """
     logger.info("\n" + "="*80)
     logger.info("Step 1: Qwen Batch Generation (Async)")
     logger.info("="*80)
-    logger.info(f"问题数: {len(questions)} | 每题候选: {num_candidates}")
+    logger.info(f"问题数: {len(questions)} | 每题候选: {num_candidates} | 对话轮数: {num_turns}")
     logger.info(f"\n{'QID':<5} {'CID':<5} {'Status':<10} {'Length':<10}")
     logger.info("-"*80)
     
@@ -75,7 +80,7 @@ async def step1_qwen_generation_async(questions: List[str], num_candidates: int)
     # 构建任务列表
     for idx, question in enumerate(questions, 1):
         for cand_idx in range(num_candidates):
-            tasks.append((idx, question, cand_idx + 1))
+            tasks.append((idx, question, cand_idx + 1, num_turns))
     
     # 异步并发执行
     coroutines = [generate_one_async(task) for task in tasks]
