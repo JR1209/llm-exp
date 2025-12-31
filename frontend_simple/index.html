@@ -36,9 +36,10 @@
                 radial-gradient(circle at 80% 70%, rgba(74, 95, 217, 0.15) 0%, transparent 50%),
                 radial-gradient(circle at 50% 50%, rgba(254, 193, 99, 0.08) 0%, transparent 50%);
             min-height: 100vh;
-            display: grid;
-            grid-template-columns: 80px 1fr;
-            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
             margin: 0;
             position: relative;
             overflow-x: hidden;
@@ -112,13 +113,14 @@
 
         /* 主容器 */
         .main-content {
-            padding: 40px;
-            overflow-y: auto;
-            max-height: 100vh;
+            width: 100%;
+            max-width: 1400px;
+            padding: 0;
         }
 
         .container {
             max-width: 1400px;
+            width: 100%;
             margin: 0 auto;
             position: relative;
             z-index: 1;
@@ -1011,12 +1013,9 @@
     </style>
 </head>
 <body>
-    <!-- 侧边栏 -->
-    <div class="sidebar">
-        <div class="sidebar-btn" id="jsonDiffBtn">
-            <div class="icon">📊</div>
-            <div>Json<br>Diff</div>
-        </div>
+    <!-- 侧边栏（预留） -->
+    <div class="sidebar" style="display: none;">
+        <!-- 未来功能预留 -->
     </div>
 
     <!-- 主内容区 -->
